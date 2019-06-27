@@ -1,0 +1,148 @@
+今日内容：
+	引用类型作为参数进行传递(理解)
+	内部类：
+		匿名内部类(掌握)
+	常用API(掌握)
+	排序(理解)
+
+	数据类型分类：
+		基本类型：
+			byte short int long char float double boolean
+		引用类型数据:
+			数组，类，接口
+
+038_类名作为形参和返回值
+	类名作为形式参数的类型，调用方法时应该传递什么？
+	类名作为返回值类型，方法运行时返回的应该是什么？
+
+039_抽象类名作为形参和返回值
+	抽象类名作为形式参数的类型，调用方法时应该传递什么？
+	抽象类名作为返回值类型，方法运行时返回的应该是什么？
+
+040_接口名作为形参和返回值
+	接口名作为形式参数的类型，调用方法时应该传递什么？
+	接口名作为返回值类型，方法运行时返回的应该是什么？
+
+	*********************************
+		当参数类型或者返回值类型是  引用数据类型时：
+			那么传递的或者返回的一定是对象！！！
+
+041_内部类
+	内部类的定义格式？
+		public class 外部类名{
+			//外部类成员
+			public class 内部类名{
+				//内部类成员
+			}
+
+		}
+	内部类能不能直接访问外部类的成员？
+		可以
+	外部类如何访问内部类的成员？
+		不能，必须创建内部类对象才可以使用
+
+042_成员内部类
+	内部类的分类？
+		成员内部类
+		局部内部类
+
+	在测试类中，如何创建一个内部类对象？（了解）
+		外部类名.内部类名 变量名 = new 外部类名().new 内部类名();
+
+043_局部内部类(了解)
+	局部内部类的定义格式？
+		class 局部内部类名{
+			//成员
+		}
+	局部内部类定义的位置？
+		在外部类的成员方法中！！！
+
+	********************
+		方法内定义的变量、局部内部类没有权限一说！！！
+		不能用权限修饰符修饰！！！！
+
+044_匿名内部类(掌握)
+	***************
+		一个类，真正的内容就是最外层大括号里面的内容，而类名仅仅是给这个类起了个名字，方便我们使用！
+
+	匿名内部类的使用格式？
+		new 类名/接口名(){
+			//重写方法
+		}
+
+045_匿名内部类在开发中的使用
+	思考：
+		使用匿名内部类有啥好处？
+			减少类文件的创建
+
+	********************
+		根据一个匿名内部类只能创建一个对象
+		匿名内部类的使用场景：只根据一个实现类创建一个对象
+
+046_Math
+    public static int abs(int a)  返回参数的绝对值
+    public static double ceil(double a)
+        返回大于或等于参数的最小double值，等于一个整数
+    public static double floor​(double a)
+        返回小于或等于参数的最大double值，等于一个整数
+    public static int round​(float a)
+        按照四舍五入返回最接近参数的int
+    public static int max​(int a,int b):返回两个int值中的较大值
+    public static int min​(int a,int b):返回两个int值中的较小值
+    public static double pow​(double a,double b):返回a的b次幂的值
+    public static double random​():返回值为double的正值,[0.0,1.0)
+
+047_System
+	如何获取当前时间毫秒值？
+        long start = System.currentTimeMillis();
+        //代码执行块
+        long end = System.currentTimeMillis();
+        System.out.println("共耗时：" + (end - start) + "毫秒");
+	********************************
+		public static native void arraycopy
+		    (Object src, int  srcPos, Object dest, int destPos, int length);
+
+         作用：把一个数组中的内容复制到另外一个数组中
+         参数：
+            Object src：
+                源数组
+            int  srcPos：
+                原数组中开始复制的索引
+            Object dest：
+                目标数组
+            int destPos：
+                目标数组开始填充的索引
+            int length：
+                复制的元素个数
+
+048_Object类的toString()方法
+	public class Student{
+        //构造、getter&setter
+	}
+	思考：
+		1.Student类的父类是谁？------Object
+			Object是类层次结构的根,每个类都可以将Object作为超类,所有类都直接或者间接的继承自该类
+		2. new Student().toString()这行代码会不会报错？
+
+		3.为什么要重写toString方法？
+			因为重写后输出的是这个对象的内容；
+			如果不重写输出的是这个对象的地址！
+
+	*******************
+		ctrl+左键：
+			变小手点击
+
+		ctrl+f12:
+			搜索方法
+
+049_Object类的equals()方法
+	为什么要重写Object类的equals方法？
+		为了比较两个对象的内容是否相同；
+
+050_冒泡排序原理
+
+051_冒泡排序代码实现
+
+052_Arrays
+	Arrays如何快速打印数组内容？
+	Arrays如何快速对数组中的内容进行排序？

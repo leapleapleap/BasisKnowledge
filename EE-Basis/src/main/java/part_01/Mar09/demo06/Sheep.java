@@ -2,10 +2,10 @@ package part_01.Mar09.demo06;
 
 public class Sheep extends Animal {
 
-    private Sheep() {
+    public Sheep() {
     }
 
-    private Sheep(int age) {
+    public Sheep(int age) {
         super(age);
     }
 
