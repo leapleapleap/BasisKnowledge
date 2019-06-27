@@ -11,6 +11,7 @@
 
     <modules>
         <module>SE-Basis</module>
+        <module>EE-Basis</module>
     </modules>
 
     <build>
