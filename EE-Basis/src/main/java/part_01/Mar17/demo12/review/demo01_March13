@@ -1,0 +1,38 @@
+1.八种基本数据类型到包装类再到String类之间的转化
+
+2.String类及StringBuilder类的区别
+
+3.StringBuilder的特有方法
+
+4.Date类和SimpleDateFormat类的使用
+    Date对象的构造方法
+        无参构造：System.currentTimeMillis()
+        带参构造：返回1970年1月1日00:00的加上参数的偏移量(还需要加上时区的偏移量)
+    Date类的方法：
+        getTime()---->System.currentTimeMillis()
+        setTime()
+    SimpleDateFormat工具类
+        SimpleDateFormat的构造方法
+            无参构造：使用默认模式和日期格式
+            带参构造：使用给定的模式和日期格式
+        SimpleDateFormat类的方法
+            format()：将日期格式化为日期/时间字符串
+            parse():将给定的字符串解析为Date对象--->需要抛出异常，可能抛出ParseException
+            创建SimpleDateFormat()对象而后调用该类方法传入对应的String类型参数或者Date参数
+
+5.Calendar类
+    此类为abstract类，不能直接获得对象。
+    但通过Calendar类的静态方法getInstance()方法可以获得Calendar实例
+    Calendar的静态字段
+        static int DAY_OF_WEEK ......
+        static int DATE 、static int HOUR ......
+        static int JANUARY ......
+        static int MONDAY ......
+    Calendar的方法
+        add(int field, int amount)：根据日历的规则，将指定的时间量添加或减去给定的日历字段
+        set(int field, int value)：将给定的日历字段设置为给定的值
+
+        注意：
+            Calendar中的MONTH是从0开始计算的；还有国际上通常的星期数和中国的星期数有差别
+
+6.静态代码块、构造代码块

@@ -1,0 +1,214 @@
+今日内容：
+	异常：
+		异常的分类(理解)
+		异常的产生(了解)
+		异常的处理(重点)
+		异常的自定义(理解)
+	多线程基础概念：
+		进程
+		线程
+
+02_异常概念&异常体系
+	什么是异常？
+		发生不正常情况。
+	java中异常的继承体系？
+		Throwable
+			--Error         --Exception
+                            	--RuntimeException
+                            		--
+
+03_异常分类
+	Error和Exception的区别？
+		error是严重的错误
+		Exception是小毛病
+	什么是运行时异常？
+		--Exception
+			--RuntimeException      --这底下都是运行时异常
+
+		在编译阶段不会报错，只有运行的时候才有可能会报错！！！
+
+	什么是编译期异常？
+		--Exception
+			--RuntimeException
+			--其他子类都是编译期异常
+
+		在编译阶段就会报错，必须给出相应的解决方案，才能执行代码
+
+04_异常的产生过程解析（理解）
+	当jvm执行程序时，发生了不正常的现象，会做哪些事儿？
+		1.创建一个异常对象(封装了异常产生的位置，原因等等信息)
+		2.把它抛给调用者！
+	jvm处理异常的默认方式？
+		中断程序的继续执行！
+
+05_throw关键字
+	NullPointerException和ArrayIndexOutOfBoundsException是什么类型的异常？
+	如何抛出一个异常？
+		throw new 异常类名（"异常产生的原因"）
+	抛出异常时如何说明异常的原因？
+	运行时异常不显示的处理可不可以？ 可以
+
+06_Objects非空判断_requireNonNull方法(了解)
+
+07_throws关键字_异常处理的第一种方式,交给别人处理
+	FileNotFoundException和IOException是什么类型的异常？
+		编译期
+	编译期异常不显示的处理可不可以？    不可以。
+	throws处理异常的格式？           throws 异常类名,异常类名
+	throws处理异常的作用？           把这个异常抛给调用者。
+
+	如果一个方法产生了多个异常，通过throws怎么声明？
+--------------------------------------------------------------------
+    多个异常使用捕获又该如何处理呢？
+        1. 多个异常分别处理
+        2. 多个异常一次捕获，多次处理
+        3. 多个异常一次捕获一次处理
+--------------------------------------------------------------------
+08_try_catch_异常处理的第二种方式,自己处理异常
+	try...catch处理异常的格式？
+
+09_Throwable类中3个异常处理的方法
+	String getMessage()？
+	String toString()?
+	void printStackTrace()?
+
+10_finally代码块
+	finally代码块格式？
+	finally代码块的特点？
+
+	思考：
+		try...catch...finally的代码执行流程
+
+11_异常注意事项_多异常的捕获处理
+	一次捕获多次处理时，当异常发生后，所有的catch代码块都会执行吗？
+		不会，只会执行其中的一个！！！
+
+12_异常注意事项_finally有return语句(了解)
+
+13_异常注意事项_子父类异常(了解)
+	子类重写父类方法时，抛出异常有什么要求？    抛出比父类更少的异常
+-------------------------------------------------------------------
+    子父类的异常:
+        - 如果父类抛出了多个异常,子类重写父类方法时,抛出和父类
+        相同的异常要么是父类异常的子类要么不抛出异常
+        - 父类方法没有抛出异常,子类重写父类该方法时也不可抛出异常
+        此时子类产生该异常,只能捕获处理,不能声明抛出
+    注意:
+        父类异常是什么样,子类异常就什么样
+-------------------------------------------------------------------
+
+14_自定义异常类
+	为什么要自定义异常类？
+		为了让异常更见名知意！
+	自定义异常类的内容？
+		带参构造：
+			让创建对象的时候可以传递异常产生的原因
+
+15_自定义异常类的练习
+
+-------------------------------------------------------------------
+    自定义异常类:
+        java提供的异常类,不够我们使用,需要自己定义一些异常类
+    格式:
+        public class XXXExcepiton extends Exception | RuntimeException{
+            添加一个空参数的构造方法
+            添加一个带异常信息的构造方法
+        }
+
+    注意:
+    1.自定义异常类一般都是以Exception结尾,说明该类是一个异常类
+    2.自定义异常类,必须的继承Exception或者RuntimeException
+        继承Exception:那么自定义的异常类就是一个编译期异常
+            如果方法内部抛出了编译期异常,就必须处理这个异常,要么throws,要么try...catch
+        继承RuntimeException:那么自定义的异常类就是一个运行期异常,无需处理,交给虚拟机处理(中断处理)
+
+//添加一个空参数的构造方法
+    public Demo12RegisterException(){
+        super();
+    }
+
+//添加一个带异常信息的构造方法
+//查看源码发现,所有的异常类都会有一个带异常信息的构造方法,方法内部会调用父类带异常信息的构造方法,让父类来处理这个异常信息
+    public Demo12RegisterException(String message){
+        super(message);
+    }
+-------------------------------------------------------------------
+
+
+16_并发与并行
+	什么是并发？
+	什么是并行？
+
+17_进程概念
+	什么是进程？
+	**************
+		一个应用程序可以占用多个进程！
+
+18_线程概念
+	什么是线程？
+		是应用程序任务的执行单元
+
+19_线程调度
+	分时调度？
+		每个线程平均分配时间
+	抢占式调度（java）？    抢夺
+
+20_主线程
+	什么是主线程？
+	主线程由谁创建的？
+		jvm
+
+21_创建多线程程序的第一种方式_创建Thread类的子类
+	开启一个新的线程的步骤？
+		1.自定一个类，继承Thread
+		2.重写Thread类的run方法，用来设置线程要执行的任务(开启线程要做什么?)
+		3.在测试类中创建自定义线程类的对象
+		4.调用 start方法开启线程
+-------------------------------------------------------------------
+1.举例：
+    public static void main(String[]args){
+         String str=null;
+         System.out.println(str.length());
+    }
+
+答： 空指针异常--->NullPointerException
+
+
+2.举例：
+    public static void main(String[]args){
+        int arr[]={1,2};
+        System.out.println(arr[2]);
+    }
+
+答： 数组索引越界异常--->ArrayIndexOutOfBoundsException
+
+
+3.举例：
+    public static void main(String[]args){
+        System.out.println(1/0);
+    }
+
+答： 算数异常--->ArithmeticException: / by zero
+
+
+4.举例：
+    public static void main(String[]args){
+        System.out.println(Integer.parseInt("itcast"));
+    }
+
+答：NumberFormatException
+
+5.举例：
+    public static void main(String[] args) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+
+        try {
+            Date date = format.parse("2018-04-03");
+            System.out.println("程序正常");
+
+        } catch (ParseException e) {
+            System.out.println("程序异常");
+        }
+    }
+
+答：程序正常

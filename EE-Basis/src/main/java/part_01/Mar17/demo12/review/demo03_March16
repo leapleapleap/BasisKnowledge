@@ -1,0 +1,139 @@
+1.数据结构：
+    栈、队列、数组、链表、红黑树
+2.List接口
+    List接口继承自Collection接口
+
+    有序集合、有索引且包含一些带索引的方法、允许存储重复元素
+    List接口特有的方法
+        add(int index,E element)    --->将指定的元素，添加到该集合中的指定位置
+    E   remove(int index)           --->移除列表中指定位置的元素, 返回的是被移除的元素
+    E   set(int index, E element)   --->用指定元素替换集合中指定位置的元素,返回值的更新前的元素
+    E   get(int index)              --->返回集合中指定位置的元素
+
+    List的静态方法of()方法，得到一个不可变的集合
+
+    List集合及其子集合都可以使用三种方法遍历集合中元素
+        1.一般的for循环遍历，需要有索引
+        2.增强for循环遍历，底层是迭代器实现
+        3.使用迭代器遍历集合，需要创建迭代器对象
+
+3.ArrayList & LinkedList
+    ArrayList：
+
+    LinkedList：
+        底层是链表实现：查询慢，增删快
+        有大量操作收尾元素的方法
+
+        特有的方法：
+            addFirst(E e):  将指定元素插入此列表的开头
+            addLast(E e):   将指定元素添加到此列表的结尾
+            push(E e):      将元素推入此列表所表示的堆栈
+
+        E   getFirst():     返回此列表的第一个元素
+        E   getLast():      返回此列表的最后一个元素
+
+        E   removeFirst():  移除并返回此列表的第一个元素
+        E   removeLast():   移除并返回此列表的最后一个元素
+        E   pop():          从此列表所表示的堆栈处弹出一个元素
+
+            isEmpty():      如果列表不包含元素，则返回true
+
+4.Set接口--->HashSet --->LinkedHashSet
+    Set接口继承自Collection接口
+    不允许存储重复的元素；没有索引及带有索引的方法--->不能使用普通的for循环遍历
+
+    HashSet特点：
+        1.不允许存储重复的元素
+        2.没有索引及带索引的方法--->不能使用普通的for循环遍历
+        3.是一个无序的集合,存储元素和取出元素的顺序有可能不一致
+        4.底层是一个哈希表结构(查询的速度非常的快)
+
+        哈希表：数组+链表/红黑树
+
+        HashSet集合保存自定义类型元素保证存入元素唯一的前提是：自定义类型必须重写hashCode()方法和equals()方法
+            Integer类和String类都重写了hashCode()方法和equals()方法
+
+        HashSet的底层其实是HashMap实现的
+
+    LinkedHashSet集合继承自HashSet集合
+        特点：
+            存取有序(底层是一个哈希表(数组+链表/红黑树)+链表:多了一条链表(记录元素的存储顺序))
+
+5.HashCode
+    哈希值:是一个十进制的整数,由系统随机给出(就是对象的地址值,是一个逻辑地址,是模拟出来得到地址,不是数据实际存储的物理地址)
+        在Object类有一个方法,可以获取对象的哈希值--->int hashCode() 返回该对象的哈希码值
+
+    hashCode方法的源码:
+        public native int hashCode();---> native:代表该方法调用的是本地操作系统的方法
+    toString方法的源码:
+        return getClass().getName() + "@" + Integer.toHexString(hashCode());
+
+6.可变参数
+        参数列表数据类型已经确定但是参数的个数不确定时,就可以使用可变参数.
+    定义方法：
+        修饰符 返回值类型 方法名(数据类型...变量名){}
+    原理及注意事项：
+        可变参数底层就是一个数组,根据传递参数个数不同,会创建不同长度的数组,来存储这些参数，参数个数可以是0(不传递),1,2...个
+        注意事项：
+            1.一个方法的参数列表,只能有一个可变参数
+            2.如果方法的参数有多个,那么可变参数必须写在参数列表的末尾
+
+7.Collections工具类
+    常用方法：
+        <T> addAll(Collection<T> c, T... elements):往集合中添加一些元素
+        shuffle(List<?> list):打乱集合顺序
+
+        *****************************************************
+        <T> void sort(List<T> list):将集合中元素按照默认规则排序
+
+            sort(List<T> list)使用前提:
+                被排序的集合里边存储的元素,必须实现Comparable,重写接口中的方法compareTo定义排序的规则
+            Comparable接口的排序规则:
+                自己(this)-参数:升序
+                参数-自己(this):降序
+
+8.Collections工具类中的sort()方法
+
+    void sort​(List<T> list):根据其元素的natural ordering按照升序排列指定的列表
+        若List集合中存放的是自定义类型的元素，则:
+            1.该自定义类必须实现Comparable
+            2.重写接口中的方法compareTo定义排序的规则(告诉sort()方法你的自定义类型的排序方法)
+            3.调用sort()方法实现自定义规则的排序
+    sort​(List<T> list, Comparator<? super T> c) 根据指定的比较器规定的顺序对指定的列表进行排序
+
+        //基本数据类型对应的包装类以及String类型
+        Collections.sort(list01, new Comparator<Integer>() {
+            //重写比较的规则
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                //return o1-o2;//升序
+                return o2-o1;//降序
+            }
+        });
+
+        //自定义类
+        Collections.sort(list02, new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                //按照年龄升序排序
+                return o1.getAge()-o2.getAge();
+            }
+        });
+
+        //lambda表达式
+        Collections.sort(list02, (o1,o2) ->o1.getAge()-o2.getAge());
+
+        //自定义类型主条件、副条件排序
+        Collections.sort(list02, new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                //按照年龄升序排序
+                int result =  o1.getAge()-o2.getAge();
+                //如果两个人年龄相同,再使用姓名的第一个字比较
+                if(result==0){
+                    result =  o1.getName().charAt(0)-o2.getName().charAt(0);
+                }
+                return  result;
+            }
+
+        });

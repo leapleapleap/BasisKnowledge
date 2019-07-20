@@ -1,4 +1,5 @@
 package part_01.Mar16.demo02.hashcode;
+
 /*  哈希值:是一个十进制的整数,由系统随机给出(就是对象的地址值,是一个逻辑地址,
     是模拟出来得到地址,不是数据实际存储的物理地址)
         在Object类有一个方法,可以获取对象的哈希值
@@ -6,7 +7,7 @@ package part_01.Mar16.demo02.hashcode;
         hashCode方法的源码:
             public native int hashCode();
             native:代表该方法调用的是本地操作系统的方法   */
-public class HashcodeDemo {
+public class Demo01_Hashcode {
     public static void main(String[] args) {
         //Person类继承了Object类,所以可以使用Object类的hashCode方法
         Person p1 = new Person();
