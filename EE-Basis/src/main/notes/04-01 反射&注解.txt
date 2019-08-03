@@ -1,0 +1,185 @@
+今日内容：
+	测试(junit):
+	反射：
+	注解：
+		@Override；
+		@FunctionalInterface
+
+学习目标：
+	只需要掌握API
+
+02_Junit_测试概述
+	黑盒测试和白盒测试的区别？
+
+03_Junit_使用步骤
+	测试类的一般怎么命名？
+		类名+Test
+	测试方法一般怎么命名？
+		test+方法名(首字母大写)
+	测试方法一般有没有返回值？
+	测试方法一般有没有参数？
+	怎么使用断言？
+		Assert.assertEquals(期望值,实际值)
+
+04_Junit_@Before & @After
+	方法上加@Before注解，这个方法有什么特点？
+	方法上加@After注解，这个方法有什么特点？
+
+05_反射_概述
+	什么叫反射？
+		把类的各个组成部分，封装成对应的对象的过程；
+	类的成员变量被封装成了什么对象？
+		Field 字段
+
+	类的成员方法被封装成了什么对象？
+		Method
+
+	类的构造方法被封装成了什么对象？
+		Constructor
+
+	Class特殊的类来描述类这种事物
+	一个Class对象对应描述一个具体的类
+	一个Class对象中：
+		Field[]
+		Method[]
+		Construcor[]
+
+	反射的好处？
+		1.在程序运行的过程中对这些反射出来的对象进行操作
+		2.解耦
+
+06_反射_获取字节码Class对象的三种方式
+	哪三种获取方式？
+		Class.forName("全类名")
+		类名.class;
+		对象名.getClass();
+
+	一个字节码文件会被加载多次么？
+		不会!只会被加载一次
+
+07_反射_Class对象功能概述
+	哪些方法？
+		getXxx;
+		getXxxs;
+		getDeclaredXxx;
+		getDeclaredXxxs;
+
+		getName
+
+08_反射_Class对象功能_获取Field
+	getFields()和getDeclaredFields()方法的区别？
+		getXxx()和getXxxs()：只能获取public修饰的成员变量
+		getDeclaredXxx()和getDeclaredXxxs()：可以获取所有修饰符修饰的成员变量
+
+	**************************
+		给成员变量赋值，其实是在给某个指定的对象的成员变量赋值；
+
+	Field对象怎么获取值？
+		get(Object target):
+			获取指定对象的该成员变量的值
+	Field对象怎么设置值？
+		set(Object target,Object value);
+			给指定的对象的该成员变量赋值
+	获取到私有的属性对象后，如果要访问，需要做什么事？
+		setAccessible(true):暴力反射
+
+09_反射_Class对象功能_获取Constructor
+	Constructor可以封装构造方法，那么怎么通过这个构造方法创建对象呢？
+
+	如果要通过空参构造创建对象，有没有简单方式？
+		Class:
+			newInstance();
+
+	**********************
+		通过方法名和参数列表(只跟类型相关，跟名字无关)可以唯一的确定一个方法；
+
+10_反射_Class对象功能_获取Method
+	怎么执行一个被封装成Method对象的方法？
+	getMethods()能不能把父类的方法获取到？
+	怎么获取方法的名称？
+
+11_反射_案例
+	怎么获取类加载器？
+	怎么通过类加载器获取指定文件对应的输入流？
+
+	*************************
+		通过ClassLoader类加载器加载的文件，必须放置到src目录下；
+
+12_注解_概念
+	什么是注解？
+		给计算机看的程序的解释说明
+	注解有什么用？
+		编译检查：@Override @FunctionalInterface
+		编写文档：
+		代码分析：
+
+13_注解_JDK内置注解
+	哪些常见注解？
+		@Override
+		@FunctionalInterface
+		@Deprecated
+		@SuppressWarnings
+
+14_注解_自定义注解_格式&本质
+	编译：
+		.java文件---->.class文件
+	反编译：
+		.class文件---->.java文件
+
+	注解的格式？
+
+		元注解
+		public @interface 注解名{
+			//属性（定义抽象方法）
+			//属性列表
+		}
+	注解的本质？
+		接口：
+		所有的注解都继承自  java.lang.annotation.Annotation
+
+15_注解_自定义注解_属性定义
+	抽象方法返回值类型？
+		1.基本数据类型
+		2.String
+		3.枚举 enum
+			enum本质上就是一个类，而且是最终的；
+			enum中的属性本质上就是当前类的一个对象，并且被  static和final修饰
+
+			public final class Person extends java.lang.Enum<Person> {
+			  public static final Person P1;
+			  public static final Person P2;
+			  public static final Person P3;
+			  public static Person[] values();
+			  public static Person valueOf(java.lang.String);
+			  static {};
+			}
+
+		4.注解
+		5.以上类型的数组
+
+	什么样的情况下，定义的属性在使用的时候可以不给值？
+		数据类型 属性名() default 默认值
+
+	如果属性的名字是value，有什么特点？
+		如果要赋值的属性只有这个一个，那么value名称可以省略；
+
+	给数组赋值时，如果数组中只有一个值，有什么特点？
+		大括号可以省略；
+
+16_注解_自定义注解_元注解
+	元注解什么作用？
+		解释说明注解的注解！！
+
+	元注解有哪些？
+		@Target ------ 表示该注解可以使用的位置
+		@Retention ------ 表示该注解被保留的阶段
+		@Documented ------ 表示该注解可以被抽取到文档中
+		@Inherited ------ 表示该注解可以被子类继承
+	ElementType.TYPE ,ElementType.METHOD,ElementType.FIELD分别代表的位置？
+		TYPE: ------ 类
+		METHOD: ------ 方法
+		FIELD: ------ 成员变量
+		PARAMETER: ------ 参数类表
+
+	描述自定义注解 @Retention取值一般是什么？
+		RetentionPolicy.RUNTIME;

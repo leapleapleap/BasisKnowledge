@@ -1,0 +1,121 @@
+今日内容：
+	缓冲流、转换流、序列化流、打印流
+
+02_缓冲流的原理
+	缓冲流的优势？-------提高了读写的效率！
+
+03_BufferedOutputStream_字节缓冲输出流
+	常用构造方法？
+	真正操作数据的是谁？
+		字节输出流
+
+04_BufferedInputStream_字节缓冲输入流
+	常用构造方法？
+	真正操作数据的是谁？
+
+05_缓冲流的效率测试_复制文件
+
+06_BufferedWriter_字符缓冲输出流
+	常用构造方法？
+	特殊的换行方法？
+		newLine()
+
+07_BufferedReader_字符缓冲输入流
+	常用构造方法？
+	特殊的读取一行方法？
+		readLine();
+			如果readLine()方法没有读取到数据，则返回null；
+			它读取的一行内容中不包含该行的换行符；
+
+08_练习_对文本的内容进行排序
+	BOM：
+		存储一个文件，会在文件内容的前边存一些字节，来这个文件是用什么编码格式进行编码的！！
+		一般情况下（除了windows），如果是utf-8编码，则不会往文件签名存编码格式(3个字节)；
+
+09_字符编码和字符集
+	编码？     OutputStreamWriter
+		把看得懂的字符转  根据一定的规则 换成看不懂的字节；
+	解码？     InputStreamReader
+		把看不懂的字节 根据一定的规则 转换成看得懂的字符；
+	为什么会发生乱码？
+		编码的规则和解码的规则不一致！！
+
+	常见字符集？
+		规定了  字符和整数的对应关系；
+
+		ASCII：
+		ISO-8859-1：拉丁字符集
+			服务器软件tomcat
+		GB：
+			gbk:
+				中国的windows默认的编码格式
+			gb2312:
+		UNICODE：
+			utf-8:
+				是我们以后开发中唯一用的编码格式！！
+			utf-16:
+			utf-32:
+
+10_编码引出的问题_FileReader读取GBK格式的文件
+	FileReader默认使用IDEA默认的编码格式
+
+11_转换流的原理
+	转换流能解决什么问题？
+		我们可以给转换流指定编解码的格式来操作指定格式的文件，从而让编码的规则和解码的规则一致，解决乱码的问题；
+
+	***************
+		java语言  javac，java命令，运行时的数据都是按照unicode字符集完成的！！！
+
+12_OutputStreamWriter介绍&代码实现
+	OutputStreamWriter常用构造？
+		OutputStreamWriter(OutputStream out)
+			默认使用utf-8
+		OutputStreamWriter(OutputStream out,String charsetName)
+			使用charsetName格式的编码
+
+13_InputStreamReader介绍&代码实现
+	InputStreamReader常用构造？
+		InputStreamReader（InputStream in）
+		InputStreamReader（InputStream in,String charsetName）
+
+14_练习_转换文件编码
+
+15_序列化和反序列化的概述
+	什么是序列化？
+		把内存中的对象 通过流  写到文件中！
+	什么是反序列化？
+		把文件中的对象  通过流  读取到内存中！
+
+16_对象的序列化流_ObjectOutputStream
+	构造方法？
+	把对象写入到文件中的方法？
+		writeObject()
+	如果一个对象要被写入到文件中，那么它对应的类有什么要求？
+		该类必须实现Serializable接口
+		该类的成员对应的类也需要实现Serializable接口；
+
+17_对象的反序列化流_ObjectInputStream
+	构造方法？
+	把文件中的对象内容读取到内存中生成一个对象的方法？
+
+18_transient关键字_瞬态关键字
+	静态变量能不能序列化？
+	普通成员变量怎么让它不被序列化？
+
+19_InvalidClassException异常_原理和解决方案
+	如果序列化之后，修改了class文件，还能反序列化成功么？
+		不能！
+	反序列化失败的根本原因？
+		在序列化的时候，会往文件中写一个序列化号；
+		在java源码编译成字节码文件时，也会写一个序列化号；
+		在反序列化的时候，会拿着文件中的序列化号和字节码文件中的序列化号进行比较，如果一样，则可以序列化成功，
+			如果不一样，则序列化失败！！！
+
+		解决方案：
+			在文件中手动的定义一个序列化版本号，一旦手动指定，那么这个版本号就固定了；
+
+	思考：
+		private static final long serialVersionUID = -3247579370971180120L;把这个常量的名字改了行不行？
+			不行！！！
+
+20_练习_序列化集合

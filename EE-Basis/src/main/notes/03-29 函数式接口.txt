@@ -1,0 +1,149 @@
+今日内容：
+	函数式接口：
+	lambda表达式的延迟特性：
+	jdk提供的函数式接口：
+		Supplier：
+		Consumer：
+		Predicate：
+		Function：
+		
+	**************************
+		Lambda表达式学习目的：为了第13天学习集合的流式操作；
+		函数式接口也是为了第13天学习集合的流式操作；
+	
+02_函数式接口的概念&函数式接口的定义
+	@FunctionalInterface是什么意思？
+		检测当前接口是不是函数式接口
+	
+03_函数式接口的使用
+
+04_性能浪费的日志案例
+	public static void showLog(int level,String message){
+		if(level==1){
+			System.out.println(message);
+		}
+	}
+	showLog(2,"1"+"2"+"3");
+	以上代码为啥会浪费性能；
+
+05_使用Lambda优化日志案例
+	为什么使用Lambda表达式可以提高性能？
+		Lambda表达式，它本质上就是一个方法(函数)；
+		方法什么时候有效果啊？            =======方法被调用的时候才有效果
+		Lambda表达式什么时候有效果？      =======方法被调用的时候
+
+	Lambda的延迟特性是什么？
+		Lambda表达式，它本质上就是一个方法(函数)，只有被调用才有效果；
+
+06_函数式接口作为方法的参数案例
+
+07_函数式接口作为方法的返回值类型案例
+
+08_常用的函数式接口_Supplier接口
+	Supplier接口的声明？
+		Supplier<T>
+	Supplier接口的抽象方法get()是用来干什么的？
+
+09_常用的函数式接口_Supplier接口练习_求数组元素最大值
+
+10_常用的函数式接口_Consumer接口
+	Consumer接口的声明？
+		Consumer<T>
+
+	Comsumer接口的accept(T t)方法是用来干什么的？
+
+11_常用的函数式接口_Consumer接口的默认方法andThen(了解！！！)
+	public default 返回值类型 方法名(参数列表){
+		//代码
+	}
+	
+	Comsumer接口的  default Comsumer andThen(Comsumer c)这个方法做了什么？
+		Comsumer con1;
+		Consumer con2;
+		
+		Consumer con3 = con1.andThen(con2);
+		con3.accpet(name);	
+			con3:  accept(){
+						con1.accpet(name);
+						con2.accept(name);
+					}
+	函数拼接
+	
+12_常用的函数式接口_Consumer接口练习_字符串拼接输出
+
+13_常用的函数式接口_Predicate接口
+	Predicate声明
+	Predicate接口的 boolean test(T t)这个方法的作用？
+	
+14_常用的函数式接口_Predicate接口_默认方法and（了解！！！）
+	Predicate接口的 default Predicate and(Predicate p)这个方法的作用？
+
+	Predicate接口中有一个方法and,表示并且关系,也可以用于连接两个判断条件
+    default Predicate<T> and(Predicate<? super T> other) {
+        Objects.requireNonNull(other);
+        return (t) ->{ this.test(t) && other.test(t)};//重写test方法
+    }
+	
+	Predicate p1;
+	Predicate p2;
+	
+	Predicate p3 = p1.and(p2);
+		p3:
+			test(T t){
+				return p1.test(t) && p2.test(t);
+			}
+
+15_常用的函数式接口_Predicate接口_默认方法or&negate（了解！！！）
+	Predicate接口的 Predicate or(Predicate p)这个方法的作用？
+	Predicate接口的 Predicate negate()这个方法的作用？
+	
+	Predicate p1;
+	Predicate p2;
+	
+	Predicate p3 = p1.and(p2);
+		p3:
+			test(T t){
+				return p1.test(t) && p2.test(t);
+			}
+	-------------------------------------		
+	Predicate p1;
+	Predicate p3 = p1.negate();
+		p3:
+			test(T t){
+				return !p1.test(t);
+			}
+
+16_常用的函数式接口_Predicate接口练习_集合信息筛选
+	ArrayList<String>
+	
+17_常用的函数式接口_Function接口
+	Function接口的声明：
+		Function<T,R>
+			T:
+				转换前的数据类型
+			R:
+				转换后的数据类型
+	Function接口的 R apply(T t)方法有什么作用？
+
+18_常用的函数式接口_Function接口_默认方法andThen(了解)
+	Function接口的 Function<T,V> andThen(Function<R,V> f)的作用？
+	
+	Function<T,V> fun1:
+		V apply(T t)
+
+	Function<V,R> fun2:
+		R apply(V v);
+		
+	Function<T,R> fun3 = fun1.andThen(fun2);
+		
+		fun3.apply(t);
+		
+		R apply(T t){
+			//把T类型的数据转换成V类型
+			
+			//得到R类型的数据
+			return fun2.apply(fun1.apply(t));
+		
+		}
+
+19_常用的函数式接口_Function接口练习_自定义函数模型拼接

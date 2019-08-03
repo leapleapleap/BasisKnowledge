@@ -1,0 +1,134 @@
+今日内容：
+	IO流：
+		概念；
+		分类：
+			输出流：
+				字节输出流---字符输出流
+			输入流：
+				字节输入流---字符输入流
+
+		Properties extends HashTable extends HashMap implements map:
+
+02_IO概述(概念&分类)
+	按照流向分类？
+		输入流：
+		输出流：
+	按照操作的数据分类？
+		字节流:
+		字符流：
+
+03_一切皆为字节
+
+04_字节输出流_OutputStream类&FileOutputStream类介绍
+	OutputStream类能不能new？    不能
+	FileOutputStream的常用构造方法？
+		FileOutputStream(String path);
+		FileOutputStream(File file);
+
+	FileOutputStream构造方法做了那些事儿？
+		1.创建FileOutputStream对象；
+		2.创建一个空的文件
+		3.会将当前对象指向创建好的文件
+
+05_字节输出流写入数据到文件
+	使用流的3个步骤？
+		1.创建流对象；
+		2.调用方法，完成读/写操作；
+		3.释放资源(占用系统资源)
+	一次写一个字节数据的方法？   write
+
+06_文件存储的原理和记事本打开文件的原理
+
+07_字节输出流写多个字节的方法
+	一次写一个字节数组的方法？            write(byte[] bys)
+	一次写一个字节数组的一部分的方法？      write(byte[] bys,int startIndex,int len)
+
+08_字节输出流的续写和换行
+	追加写入的方式？
+		FileOutputStream(String path,boolean append);
+		FileOutputStream(File file,boolean append);
+	不同操作系统下的换行符号？
+
+09_字节输入流_InputStream类&FileInputStream类介绍
+	InputStream可以new么？
+	FileInputStream的常用构造方法？
+
+10_字节输入流读取字节数据
+	一次读取一个字节的方法？    int read()
+	读取到文件末尾的标志？      方法返回-1；
+
+11_字节输入流一次读取一个字节的原理
+
+12_字节输入流一次读取多个字节
+	一次读取一个字节数组的方法？
+		int read(byte[] bys);
+		返回值：一次读取的有效字节的个数；
+		每一个读取回来的字节，都会从数组的0索引处开始替换；
+
+	读取到文件末尾的标志？
+		返回的有效字节个数为  -1；
+
+	把字节数组中的内容转换成字符串的方法？
+		String(byte[] bys);
+		String(byte[] bys,int start,int length);
+
+13_练习_文件复制
+
+14_使用字节流读取中文的问题
+	有什么问题？
+
+15_字符输入流_Reader类&FileReader类介绍
+	Reader类可以new么？
+	FileReader的常用构造？
+
+16_字符输入流读取字符数据
+	一次读取一个字符的方法？
+	一次读取一个字符数组的方法？
+	字符串组转换成字符串的方法？
+
+17_字符输出流_Writer类&FileWriter类介绍
+	Writer能直接new么？
+	FileWriter的常用构造？
+
+18_字符输出流的基本使用_写出单个字符到文件
+	一次写一个字符的方法；
+	write(int c)
+		flush;
+		close;
+
+19_flush方法和close方法的区别
+	flush方法的作用？     把缓冲区的数据刷入到硬盘
+	close方法的作用？     1.把缓冲区的数据刷入到硬盘
+		                2.释放资源
+	flush方法调用后，流对象还能不能继续使用？     能
+	close方法调用后，流对象还能不能继续使用？     不能
+
+20_字符输出流写数据的其他方法
+	一次写一个字符数组的方法？
+	一次写一个字符串的方法？
+
+21_字符输出流的续写和换行
+	追加写入的方式？
+
+22_使用try_catch_finally处理流中的异常
+	释放资源的代码应该放在哪里？
+
+23_JDK7和JDK9流中异常的处理(了解)
+	jdk7处理异常新特性的格式？
+	jdk9处理异常新特性的格式？
+
+24_使用Properties集合存储数据,遍历取出Properties集合中的数据
+	Properties集合的键和值默认是什么类型的？   String
+		作用：
+			只用来操作字符串类型的数据
+			可以和IO流配合起来完成文件的操作
+
+	存储键值对的方法？
+	获取值的方法？
+	获取键集合的方法？
+
+25_Properties集合中的方法store
+	键和值的默认分隔符？      =
+	.properties类型的文件一般存储的是键值对的数据
+
+26_Properties集合中的方法load

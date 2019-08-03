@@ -1,0 +1,48 @@
+1.函数式接口
+    @FunctionalInterface 作用和 @Override 作用相似
+    函数式接口中只允许有一个抽象方法（但允许有默认方法、静态方法、私有方法）
+
+    -->引用接口的实现类创建对象，再使用对象调用调用该实现类的重写方法   ↓
+    -->使用匿名内部类的写法   ↓
+    -->使用Lambda的写法  ↓
+    -->使用Lambda的简化写法
+
+    Lambda表达式还能够延迟操作执行的时间从而达到提升效率的结果
+        Runnable接口
+        Comparator接口
+
+2.JDK中的函数式接口
+    1.生产型接口---Supplier接口
+        java.util.function.Supplier<T>接口仅包含一个无参的方法：T get()。用来获取一个泛型参数指定类型的对象数据。
+        Supplier<T>接口被称之为生产型接口,指定接口的泛型是什么类型,那么接口中的get方法就会生产什么类型的数据，而生产数据的方式由自己决定
+        定义方法其参数传递指定类型的Supplier对象，在方法体中使用Supplier对象调用get方法。
+    2.消费型接口---Consumer接口
+        java.util.function.Consumer<T>接口则正好与Supplier接口相反，它不是生产一个数据，而是消费一个数据，其数据类型由泛型决定。
+        Consumer接口中包含抽象方法void accept(T t)，意为消费一个指定泛型的数据。
+        定义方法其参数传递指定类型的Consumer对象，在方法体中使用Consumer对象调用accept方法
+
+        andThen方法：需要两个Consumer接口,可以把两个Consumer接口组合到一起,在对数据进行消费
+               写法：con1.andThen(con2).accept(s);
+    3.判断型接口---Predicate接口
+        java.util.function.Predicate<T>接口--->作用:对某种数据类型的数据进行判断,结果返回一个boolean值
+        Predicate接口中包含一个抽象方法：boolean test(T t):用来对指定数据类型数据进行判断的方法
+
+        and方法：表示并且关系,也可以用于连接两个判断条件
+            default Predicate<T> and(Predicate<? super T> other) {
+                Objects.requireNonNull(other);
+                return (t) -> this.test(t) && other.test(t);
+            }
+        or方法：表示或者关系,也可以用于连接两个判断条件
+            default Predicate<T> or(Predicate<? super T> other) {
+                Objects.requireNonNull(other);
+                return (t) -> test(t) || other.test(t);
+            }
+        negate方法：表示取反的意思
+            default Predicate<T> negate() {
+                return (t) -> !test(t);
+            }
+    4.转换型接口---Function接口
+        java.util.function.Function<T,R>接口用来根据一个类型的数据得到另一个类型的数据，前者称为前置条件，后者称为后置条件。
+        Function接口中最主要的抽象方法为：R apply(T t)，根据类型T的参数获取类型R的结果。如何转换的规则由自己定
+
+        andThen方法：用来进行组合操作
