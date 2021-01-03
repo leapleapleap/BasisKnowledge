@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function test(height,weight) {
+            var standweight = (height-108)*2;
+            if(weight-standweight<-10){
+                console.log("您的体质偏瘦");
+            }else if(weight-standweight>10){
+                console.log("您的体质偏胖");
+            }else{
+                console.log("您的体质正常");
+            }
+        }
+        test(171,120);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

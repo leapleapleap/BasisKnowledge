@@ -1,0 +1,220 @@
+Http:
+	是一种基于tcp/ip的高级协议
+	基于请求和响应的协议
+	每一次请求对应一次响应
+
+	tcp作用:传输层协议，它可以保证数据的正常传输
+	http作用:应用层协议，规定数据传输的格式
+
+	请求消息格式：
+		请求行：请求方式 URI 协议/版本
+
+		请求头：header
+			一些键值对信息
+			Referer:传递请求从哪里来
+                防盗链；
+                统计；
+			User-Agent:传递浏览器的版本信息；
+                可以做浏览器的兼容；
+		请求空行：就是空行，用来分割请求头和请求体
+		请求体：如果请求是post提交方式，那么请求的参数会封装到请求体中
+            username=值&password=值
+
+	http协议版本：
+		1.0 每一个请求都会建立一次连接，处理请求，完毕后就会释放连接；
+		1.1 第一个请求会建立连接，处理请求完毕后，并不会立刻释放连接，而是会等一段时间，
+			如果这段时间内还有其他的请求发出，则会复用连接；
+
+			如果同一时刻发出多个请求，他们会共用一个连接对象，但是每个请求的数据会依次发送
+
+		1.2 如果同一时刻发出多个请求，他们会共用一个连接对象，每个请求的数据会同时发送
+
+Request:
+	代表一次请求，它封装了一次请求中浏览器发送给服务器的所有数据，可以通过request对象得到浏览器发送过来的数据
+
+	request继承体系：
+		ServletRequest      ---接口
+		        |
+		HttpServletRequest  ---接口
+				实现类由服务器(tomcat)厂商提供
+
+	request对象由tomcat服务器创建，tomcat服务器会解析浏览器发送过来的数据，并把它封装到request对象中
+
+	request的功能:
+		获取请求数据
+			请求行：
+				getMethod           ---获取请求方式
+				getRequestURI       ---获取请求的URI（统一资源标识符）
+				getRequestURL       ---获取请求的URL（统一资源定位符）
+				getContextPath      ---获取请求的虚拟路径
+				getProtocol         ---获取请求的协议及版本
+				getServletPath      ---获取请求的servlet路径
+				getRemoteAddr       ---获取发送请求的地址
+				getQueryString      ---获取请求携带的数据信息
+
+			请求头：
+				getHeader(String key)
+				getHeaderNames()
+
+			请求体：
+				getReader()
+				getInputStream()
+
+			请求参数的通用获取方式：
+				String getParameter(String key)             ---通过请求头获取其对应的参数
+				String[] getParameterValues(String key)     ---通过请求头获取其对应的参数s(checkbox)
+				Enumeration getParameterNames()             ---获取所有请求头的名称并放入Enumeration对象中，使用该对象的方法获取存
+                                                               入的值
+				Map<String,String[]> getParameterMap()      ---获取所有请求头及其对应的值，将其存入Map键值对中
+
+		请求转发
+			Request:
+			    getRequestDispatcher(String path);
+			Dispatcher:
+				forward(request,response);
+				request.getRequestDispatcher(String path).forward(request,response);
+
+			特点：
+				一次请求转发的过程中，浏览器只发起了一次请求
+				请求转发过程中，浏览器的地址栏不会发生变化
+		共享数据
+			request可以称为一个域对象，共享数据的范围是一次请求的范围：
+                setAttribute(String key,Object obj);
+                removeAttribute(String key);
+                getAttribute(String key);
+		获取ServletContext对象
+			getServletContext();
+
+今日内容：
+	登录案例
+	Http响应消息
+	Response对象
+
+21_登录案例_代码实现1
+	jar包应该放在哪个目录下？
+		WEB-INF:
+			lib
+	编写代码的步骤？
+
+	做一个项目:
+		1.分析项目需求
+		2.设计数据库
+		3.开发环境的准备
+			导入jar包
+			工具类
+			创建包结构
+
+		4.编码阶段
+			准备实体类
+			编写数据库操作代码
+			Servlet代码
+			前端代码
+
+22_登录案例_代码实现2
+
+23_登录案例_BeanUtils基本使用
+
+24_登录案例_BeanUtils介绍
+	javaBean的作用？
+		封装数据:标准类
+
+		要求：
+			private修饰的成员变量
+			setter/getter方法
+			空参构造
+
+	BeaUtils的实现机制
+		反射：
+			setter/getter
+
+02_HTTP_响应消息_概述
+	响应消息的组成部分？
+
+03_HTTP_响应消息_响应行_状态码
+	响应状态码分类及每一类代表什么意思？
+
+		1xx 服务器等待浏览器发送信息
+		2xx 请求响应成功  200响应成功
+		3xx 重定向     302重定向 304加载缓存
+		4xx 浏览器错误   404客户端加载资源在服务端未找到 405使用的方式有误(get/post/put/delete/...)
+		5xx 服务器错误   500...
+
+04_HTTP_响应消息_响应头
+	Content-Type响应头什么意思？
+		1：告诉浏览器，当前响应的数据的格式
+		2：告诉浏览器，用什么编码解析当前的数据
+        response.setContentType(MIME,encoding);
+	Content-disposition响应头什么意思？
+		告诉浏览器，用什么方式打开服务器传递的数据
+			in-line     在当前页面打开
+			attachment  以附件形式打开
+
+05_Response_功能介绍
+	如何设置状态码？
+	如何设置响应头？
+	如何设置响应体？
+
+06_Response_案例1_重定向_代码实现
+	一个重定向，浏览器发送了几次请求？
+	如果要重定向，服务器怎么告诉浏览器新的资源位置？
+		响应状态码：302
+		响应头：location：资源位置
+	简便的重定向方法？
+		Response:
+			sendRedirect(String path);
+
+07_Response_案例1_重定向_特点
+	一个重定向，浏览器发送了几次请求？
+		两次
+	为什么重定向后，request域不能再共享数据？
+		因为重定向中发起了两次请求
+		一个request只能在一次请求中共享数据
+
+08_Response_案例1_路径_相对路径
+	请求转发中,第二个资源是被服务器访问的     ---不用带虚拟路径
+    重定向中,第二个资源是被浏览器访问的       ---需要带虚拟路径
+
+	绝对路径？ 以/开头
+	相对路径？ 不以/开头     ./   ../  省略
+
+09_Response_案例1_路径_绝对路径
+	前提：
+		项目部署的时候配置了虚拟目录
+		什么时候应该写 "/虚拟目录"?
+			如果这个资源是从浏览器发出请求，则需要使用虚拟目录
+
+		什么时候不应该写 "/虚拟目录"?
+			如果这个资源是从服务器发出请求，则不需要使用虚拟目录
+
+		如何动态获取当前项目的虚拟目录？
+			request:
+				getContextPath();
+	**************************************************
+		请求转发的资源只能是本项目中的资源
+
+10_Response_案例2_输出字符数据
+	服务器给浏览器写中文的时候，为什么会乱码？
+		默认服务器用iso-8859-1进行编码
+		浏览器默认使用gbk进行解码
+	乱码问题应该怎么解决？
+		response.setContentType("text/html;charset=utf-8"):
+			1.告诉tomcat，用utf-8进行编码;
+			2.告诉浏览器，用utf-8进行解码;
+			3.告诉浏览器，我发送的数据是 text/html 格式
+
+	*****************************************
+		request.setCharacterEncoding("utf-8"):解决浏览器提交中文数据乱码
+		response.setContentType("text/html;charset=utf-8"):解决服务器响应中文数据乱码
+
+11_Response_案例3_输出字节数据
+	 //如果不传参数，则使用windows系统默认的编码 GBK编码
+	byte[] bytes = "你好".getBytes();
+	System.out.println(bytes.length);
+	//如果传参数，则使用指定的编码格式进行编码
+	byte[] bytes1 = "你好".getBytes("GBK");
+	System.out.println(bytes1.length);
+
+12_Response_案例4_验证码_分析
+	为什么要存在验证码？
+
+13_Response_案例4_验证码_代码实现

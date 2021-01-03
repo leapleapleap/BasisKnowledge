@@ -1,0 +1,221 @@
+session:
+	是服务器端会话技术，它是把数据存储到服务器端
+
+	数据共享流程：
+		1.浏览器第一给服务器发送请求，申请session对象，
+			服务器会创建一个新的Session对象；
+			服务器会自动的给浏览器一个Cookie，JSESSIONID，每个JSESSIONID会对应一个session对象
+
+		2.浏览器第二次给服务器发送请求，会携带JSESSIONID值给服务器
+			服务器获取到JSESSIONID，会去查找JSESSIONID为该值的session对象
+			这样可以保证两次请求获取到的session对象是同一个
+
+	********************
+		session是基于cookie实现的
+		session存储的数据在服务器上，所以比较安全
+		session存储数据的大小没有限制
+
+
+	特点：
+		session共享数据的范围：
+			一次会话中的多个请求
+
+		服务器响应给浏览器的JSESSIONID的cookie默认存在浏览器的内存中，所以当浏览器关闭后，session不能再共享数据
+
+jsp:
+	java server page：服务器端页面
+
+	本质：
+		是一个servlet
+
+	特点：
+		可以同时编写html代码和java代码
+
+	脚本：
+		<%%>
+			会把java代码放到对应的servlet的service方法中
+		<%!%>
+			会把java代码放到对应的servlet的成员位置
+		<%=%>
+			会把java代码放到对应的servlet的service方法中，它会把表达式的值输出到页面上
+
+	内置对象：
+		pageContext：
+			当前页面共享数据
+		request：
+			一次请求共享数据
+		session：
+			一次会话共享数据
+		application：
+			整个web项目共享数据
+
+		page:代表当前servlet，this；
+
+		response：
+
+		out：
+
+		exception：
+
+		config：
+
+
+	指令：
+		格式：
+			<%@指令名称 属性名='属性值'%>
+		page:
+			contentType:
+				设置当前页面的编码格式；
+			isErrorPage：
+				标识当前页面是一个错误页面，可以使用exception内置对象
+			errorPage:
+				当页面发生错误后，跳转的资源
+			import：
+				导入jar包
+		include:
+			可以包含其他的jsp页面，为了提高代码的复用性
+		taglib:
+			可以引入其他的标签库
+			<%@taglib prefix='c' uri='标签库的位置' %>
+
+
+mvc:
+	它是一种开发模式：
+
+	jsp中如果同时包含过多的java代码、html代码、css代码、javascrip代码，
+		代码的阅读性、维护性非常差，造成的结果就是分工难；
+
+	Model：
+		做数据的封装，javaBean
+	Controller：
+		1.获取客户端的请求参数；
+		2.调用Model，得到数据；
+		3.把数据交给View来展示
+		servlet；
+	View：
+		展示数据；
+		jsp，html
+
+今日内容：
+	EL：
+	JSTL：
+
+09_EL_概述
+	什么是EL？
+		是一种表达式语言；
+	EL的作用？
+	EL的语法？
+	如何让jsp页面不解析EL表达式
+
+	**EL表达式可以替换jsp中的<%=%>脚本
+
+10_EL_运算符
+	空运算符 empty的作用？
+		可以判断 集合、字符串、数组是否为null，或者(不是null、但其长度为0)；
+
+11_EL_获取域中存储的值
+	四种域？
+		pageScope;
+		requestScope;
+		sessionScope;
+		applicationScope;
+	从域中获取值的两种方式？
+		${域名.键名}
+		${键名}:从最小的域开始查询，找到即停止；
+	如果域中没有获取到指定键对应的值，在页面中会显示什么？
+		""
+
+12_EL_获取域中存储的值_对象值
+	如果域中存储的是一个对象，那么怎么获取该对象的属性值？
+
+	如果要获取对象的属性值，那么就必须提供getter方法；
+
+
+
+13_EL_获取域中存储的值_List集合&Map集合值
+	如何获取List集合中指定索引处的内容？
+	如果传入的索引大于List集合的最大索引，会不会报错？
+	如何获取Map集合中指定键对应的值？
+
+
+
+14_EL_empty运算符&隐式对象pageContext
+	empty的使用格式？
+		${not empty 键名}
+	${pageContext.request.contextPath}有什么用？
+		用来动态获取虚拟目录；
+
+
+15_JSTL_概述
+	什么是jstl？
+		标签库
+	jstl的作用？
+		替换jsp中的java代码
+	jstl的使用步骤？
+		导入jar包；
+
+
+16_JSTL_常用标签_if
+	c:if标签 的必须属性test的属性值是什么？
+
+
+
+
+17_JSTL_常用标签_choose
+	对比着java中的switch来学习，总共涉及到几个标签？
+
+
+
+18_JSTL_常用标签_foreach
+	items属性什么意思？
+		指定容器对象
+	begin;
+		开始索引
+	end;
+		结束索引
+	var：
+		临时变量
+	varStatus的中 index和count分别代表什么？
+		记录了本次循环的一些状态信息
+		index：
+			本次循环的索引
+		count：
+			当前是第几次循环
+
+
+19_JSTL_练习
+	table中有多少行数据是怎么确定的？
+
+
+20_三层架构
+	每一层需要做的事情？
+	界面层包含了哪两个部分？
+
+
+21_案例_需求分析&设计
+	1.需求分析
+	2.技术选型
+	3.准备数据库
+	4.准备开发环境：
+		创建项目
+		导入jar包
+		创建包结构
+		常用工具类
+	5.写代码
+
+	6.测试
+
+	7.代码部署
+
+22_案例_环境搭建
+
+
+
+23_案例_列表查询_分析
+	1.在index.htm中点击"查询所有用户信息"需要跳转到UserListServlt中
+		然后在UserListServlet中转发到jsp中返回给浏览器？
+	思考：
+		service层和dao层，为什么要设计一个接口，然后再写一个实现类实现该接口？
+
+
+24_案例_列表查询_代码实现1

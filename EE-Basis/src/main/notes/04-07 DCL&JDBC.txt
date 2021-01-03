@@ -1,0 +1,106 @@
+今日内容:
+	sql:
+		ddl:defination
+		dml:manipulate
+		dql:query
+		dcl:control
+
+	DCL(了解):
+		权限相关操作；
+
+	JDBC：
+		常用API；
+		完成数据库的增删改查；
+		jdbc工具类；
+		登录案例；
+
+17_DCL_管理用户_增删查
+	数据库用户信息在哪里存放？
+		mysql数据库中的user表中
+	Host列中 % 是什么意思？
+		任意主机
+	怎么创建一个用户？
+		create user '用户名'@'主机名' identified by 密码
+	怎么删除一个用户？
+		drop user '用户名'@'主机名'
+
+18_DCL_管理用户_修改密码
+	两种修改方式？
+		update user set password=password('123') where user='用户名'
+		set password for '用户名'@'主机名'=password('123')
+
+19_DCL_管理权限
+	怎么查看一个用户的权限？
+		show grant for '用户名'@'主机名'
+	怎么给一个用户授予某些权限？
+		grant 权限列表 on 数据库.表名 to '用户名'@'主机名'
+	所有权限的通配符是什么？
+		all
+	所有库的通配符是什么？
+		*
+	所有表的通配符是什么？
+		*
+	怎么撤销权限？
+		revoke 权限列表 on 数据库.表名 from '用户名'@'主机名'
+
+02_JDBC_概念
+	什么是jdbc？
+		sun公司定义的一套接口(规则)，用来操作关系型数据库，这些接口的实现类由不同的数据库厂商提供。使用的是哪个
+		数据库厂商提供的实现类，那么你的代码就可以操作哪个厂商的数据库。
+
+		程序员和数据库厂商遵守。
+
+	面向接口编程！！
+
+03_JDBC_快速入门
+	jar包：
+		其实就是个压缩包；
+		里面放的是.class文件
+
+	怎么导入一个jar包到某个module中？
+	使用jdbc的步骤？
+
+04_JDBC各个类详解_DriverManager_注册驱动(理解)
+	DriverManager的两个功能？
+	注册驱动的3种方式？
+		Class.forName("com.mysql.jdbc.Driver");
+		DriverManager.registerDriver(Driver d);
+		自动注册；
+
+05_JDBC各个类详解_DriverManager_获取数据库连接
+	url怎么写？
+
+06_JDBC各个类详解_Connection
+	Connection类如何获取执行sql的对象？
+	Connection类如何管理事务？
+
+07_JDBC各个类详解_Statement
+	Statement提供了哪些方法？
+		boolean execute(String sql);
+		int executeUpdate(String sql);
+			影响的行数：
+				可以执行DML，DDL(都返回的是0)
+
+		ResultSet executeQuery(String sql);
+	excuteUpdate（String sql） 的返回值是什么意思？
+
+08_JDBC练习_insert语句
+
+09_JDBC练习_update语句
+
+10_JDBC练习_update、DDL语句
+
+11_JDBC各个类详解_ResultSet_基本使用
+	ResultSet提供了哪些方法来处理结果集？
+
+12_JDBC各个类详解_ResultSet_遍历结果集
+	boolean next():
+		1.游标下移一行；
+		2.判断当前行有没有数据，有返回true，无返回false
+
+13_JDBC练习_select语句
+	类属性的名称和 数据库的列名称有没有关系？
+
+14_JDBC工具类
+	做了哪及方面的抽取？
+	怎么获取jdbc.properties文件的绝对路径？

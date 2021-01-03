@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择器</title>
+    <style>
+        div{
+            color:red;
+            font-size: 20px;
+        }
+        .c1{
+            color:green;
+            font-size: 5%;
+        }
+        #i1{
+            font-size: 50px;
+        }
+
+        span{
+            color:yellowgreen;
+            font-size: 30px;
+        }
+        .c2{
+            font-size: 20px;
+        }
+        #i3{
+            font-size: 30px;
+        }
+
+        div>p{
+            color:greenyellow;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="c1" id="i1">黑马程序员</div>
+    <div id="i2">传智播客</div>
+    <span class="c1">哈哈</span>
+    <span class="c1 c2">嘿嘿</span>
+    <span class="c2" id="i3">嘻嘻</span>
+
+    <div>
+        <span>
+            <span>
+                <p>div内3</p>
+            </span>
+            <p>div内2</p>
+        </span>
+
+        <p>div内1</p>
+    </div>
+    <p>div外</p>
+</body>
+</html>

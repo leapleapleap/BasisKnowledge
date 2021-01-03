@@ -1,0 +1,173 @@
+今日内容：
+	javascript：
+		基础语法：
+			数据类型
+			常量
+			变量
+			运算符
+			流程控制语句
+
+		javacript提供的内容对象：
+			方法
+		常用对象：
+			BOM对象
+			DOM对象
+		事件；
+
+2_JavaScript_简介
+	JavaScript代码在哪里运行？
+		浏览器中，每个浏览器都有一个内置的js解析引擎
+	JavaScript代码需不需要编译？
+		不需要
+	JavaScript的作用？
+		让页面活起来！！！
+
+3_JavaScript_发展史
+	java和JavaScript在使用上有关系么？
+
+4_JavaScript_语法_与html结合方式
+	<script></script>标签写到哪里？
+	外部的.js文件怎么引入？
+
+5_JavaScript_语法_注释&数据类型
+	注释分类？
+		//
+		/**/
+	数据类型分类？
+		原始数据类型：
+			number
+			string
+			boolean
+			null
+			undefined
+		引用数据类型：
+			对象
+
+	*************************
+		javascript是一门面向对象的编程语言
+
+6_JavaScript_语法_变量
+	强类型语言和弱类型语言的区别？
+		强类型：
+			开辟变量的内存空间时，会指定该内存空间存储的数据的数据类型
+		弱类型：
+			开辟变量的内存空间时，不会指定该内存空间存储的数据的数据类型
+
+7_JavaScript_语法_变量_typeof
+	typeof使用格式？
+	typeof(null) 结果是什么？
+
+8_JavaScript_语法_一元运算符
+	当 + -连接的操作数不是数值类型的时候，会发生什么？
+		数据类型的转换：
+			string->number;
+				如果字符串的字面值是数值，那么正常转换，
+				如果字符串的字面值不是数值，那么转换成NaN，
+			boolean->number;
+				true:1
+				false:0
+
+			null--->number
+				0
+
+			undefined--->number
+				NaN
+
+9_JavaScript_语法_算数&比较运算符
+	数值和内容为数值字符串怎么比较？
+		先进行类型转换，再比较值
+	===  和 == 的区别？
+		===：
+			先判断类型，如果不一致，则直接false，如果一致，再比较值
+		==：
+			如果类型一致，则比较，如果类型不一致，则先转换类型，再比较
+
+10_JavaScript_语法_逻辑运算符
+	number怎么转boolean？
+		0和NaN转为false；
+		其他为true
+
+	字符串怎么转boolean
+		空字符串为false；
+		其他为true
+
+	null怎么转boolean？
+		false
+
+	undefined怎么转boolean？
+		false
+
+	对象怎么转boolean？
+		true
+
+11_JavaScript_语法_三元运算符
+	表达式？表达式：表达式
+
+12_JavaScript_语法_特殊语法(了解)
+	js中一条语句结束的标志是什么？
+	定义变量时，用var关键字和不用var关键字有什么区别？
+
+	***********************
+		变量作用域的问题：
+			js：
+				全局作用域：
+				函数作用域：
+
+13_JavaScript_语法_流程控制语句
+	switch语句中，被判断的量可以是哪些类型的数据？
+
+	*************************
+		js的一个内置对象 console：
+			log(变量)：
+				把该变量的值输出到控制台
+
+		ECMAScript6标准中提出的一个关键字  let：
+			使用格式：
+				let 变量名 = 值
+
+			使用let定义的变量，具有块级作用域
+
+14_JavaScript_语法_练习_99乘法表
+
+15_JavaScript_对象_Function
+	创建一个Function对象的3种方式？
+		var 方法名 = new Function(参数列表，方法体);
+		function 方法名(参数列表){
+			方法体
+		}
+
+		var 方法名 =function (参数列表){
+			方法体
+		}
+
+		*********************
+		js中，如果一个方法没有名字，那么称之为匿名函数
+
+	定义方法时，可以省略参数列表的参数类型和方法的返回值类型么？
+		必须省略
+	调用方法，实际传参个数与参数列表中个数不一致，会不会有问题？
+		不会！
+		*******
+			js中方法的调用只跟方法名有关系；
+
+	************************
+		每个Function对象内部有一个隐藏的arguments数组对象，接收调用方法时传递的所有参数
+
+16_JavaScript_对象_Array
+	new Array(一个数字)这种创建方式什么意思？
+		创建指定长度的数组
+	Array对象中，可以存储多种类型的元素么？
+	Array的长度可以变化么？
+
+	var arr = new Array(2);
+	var arr = [2]；
+
+17_JavaScript_对象_Date
+	Date对象获取本地格式字符串的方法？
+		toLocalString()
+	Date对象获取毫秒值的方法？
+		getTime()
+
+18_JavaScript_对象_Math
+	使用Math需不需要通过new来创建？
+	random()方法产生的随机数范围？

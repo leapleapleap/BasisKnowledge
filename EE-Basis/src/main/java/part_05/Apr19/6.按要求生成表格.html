@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        /*
+            获取行和列输入的数字，点击生成按钮，在id为table的div中生成对应行数和列数的表格
+            每个单元格的内容都是：表格内容
+         */
+
+
+        window.onload = function () {
+            let btn = document.getElementById("btn");
+            btn.onclick = creatTable;
+        };
+
+        function creatTable() {
+            var row = document.getElementById("row").value;
+            var col = document.getElementById("column").value;
+            var table = "<table cellspacing='0px' cellpadding='0px' border='1px solid red'>";
+            for (let i = 0; i < row; i++) {
+                table+="<tr>";
+                for (let j = 0; j < col; j++) {
+                    table+="<td>表格内容</td>";
+                }
+                table+="</tr>"
+            }
+            table+="</table>";
+
+            document.getElementById("table").innerHTML = table;
+        }
+    </script>
+
+    <style>
+        #table table{
+            background-color: yellow;
+            font-size: 35px;
+            font-family: 楷体;
+        }
+    </style>
+</head>
+<body>
+行：<input type="text" name="row" id="row"/>
+列：<input type="text" name="column" id="column"/>
+<br>
+
+<input type="button" value="生成" id="btn"/>
+<div id="table"></div>
+
+</body>
+</html>

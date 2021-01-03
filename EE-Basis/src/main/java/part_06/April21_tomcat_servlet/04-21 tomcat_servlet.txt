@@ -1,0 +1,153 @@
+03_web服务器软件_概述
+	什么是服务器？
+		安装了服务器软件的高性能的计算机；
+	web服务器软件的作用？
+		接收请求，处理逻辑，给出响应
+		weblogic
+		...
+
+	什么是JavaEE？
+		企业级应用开发的规范总和
+
+04_tomcat_安装&卸载&启动
+	conf目录下有什么内容？
+	webapps目录下有什么内容？
+	怎么启动tomcat服务器软件？
+
+05_tomcat_启动问题分析
+	没有配置JAVA_HOME
+	端口号被占用
+
+Tomcat入门：
+	Web服务器软件，可以接收请求，处理逻辑，给出响应
+	安装了web服务器软件的计算机，可以称为web服务器
+
+	安装：
+		解压
+	卸载：
+		删除文件夹
+	启动：
+		startup.bat
+	启动常见问题
+
+今日内容：
+	tomcat常用操作
+	web项目的项目结构
+	Servlet
+	Http协议
+
+06_tomcat_关闭
+
+07_tomcat_部署项目的方式
+	几种部署方式？
+		1.把项目(文件夹)拷贝到  webapps目录下
+			把项目(war包)拷贝到  webapps目录下
+			war包：压缩文件，里面放了class文件、静态的资源（HTML，css，js，图片）
+			jar包：压缩文件，里面放了class文件
+			********************
+            常见的压缩方式：
+                zip:压缩算法和war的压缩算法基本一致
+                rar:
+
+			虚拟目录：
+				文件夹的名称
+
+		2. conf/server.xml:
+			<Host>
+				<Context docBase="项目的真实路径" path="项目虚拟目录"/>
+			</Host>
+
+			http://localhost:8080/a.html
+			虚拟目录是为了不把服务器的真实目录暴露给外界
+
+		3. 在conf/catalina：
+			创建任意名称的xml文件，在该文件中：<Context docBase="项目的真实路径">
+
+			虚拟目录：xml文件的名称
+
+			热部署：在服务器不关闭的情况下可以部署，也可以卸载
+
+08_tomcat_动态java项目的目录结构
+	javaWeb项目的目录结构？
+		项目根目录：
+			--其他的静态资源
+			--WEB-INF
+				classes:
+				lib:
+				web.xml:
+
+09_tomcat_与IDEA集成&创建web项目
+	Web项目怎么部署？
+
+10_Servlet_概述
+	JDBC: sun定义的一套接口，标准，不同的数据库厂商提供实现类；
+		程序员操作的是接口，真正实现类对象来调用方法，多态！！！！
+
+		面向接口编程；
+
+	什么是Servlet？
+		是个接口，定义了一个类能被Web服务器软件执行的规则！！！！
+
+	自定义的类要满足这样的规则：
+		其实是要实现Servlet这接口，然后重写里面的方法；
+
+11_Servlet_快速入门
+	步骤？
+	如何配置Servlet？
+
+12_Servlet_执行原理
+	查找的顺序？
+	***********************
+		tomcat是一款纯Java语言编写的软件
+		main方法在tomcat的源码中可以找到（org\apache\catalina\startup\Bootstrap.java）
+		tomcat底层也是通过socket来完成计算机之间的通信！！！
+
+13_Servlet_生命周期方法
+	init方法什么时候执行？
+		Servlet对象被创建；一次
+	service方法什么时候执行？
+		用户访问，提供服务时执行；多次
+	destroy方法什么时候执行？
+		servlet销毁之前执行；一次；
+
+14_Servlet_生命周期详解
+	Servlet对象创建的时机？
+		默认：
+			用户第一次访问时创建；
+		修改：
+			<load-on-startup>
+		**************
+			一个Servlet类，在内存中只会存在一个对象；
+
+	多个用户同时访问一个Servlet资源，会有什么问题？
+		线程安全问题：
+		多线程并发：
+			成员变量存在线程安全问题
+			局部变量不存在线程安全问题
+
+15_Servlet_3.0 注解配置
+	注解就是为了替换配置文件
+	通过注解怎么配置一个Servlet？
+	***************************
+    同一个Servlet，要么在xml中配置，要么使用注解配置
+
+16_IDEA与tomcat相关配置(了解)
+	IDEA部署项目后，这个项目没有在wabapps下，在哪里？
+	class字节码描述文件在哪里？
+	web-inf目录下的资源，有什么特点？
+
+02_Servlet_体系结构
+	Servlet的继承体系？
+		Servlet:接口；
+			--GenericServlet
+			--HttpServlet
+	自定义Servlet实现类对象为什么要继承HttpServlet？
+		因为HttpServlet里面已经封装了一些Http协议相关的代码
+		自定义的类继承HttpServlet后，可以简化书写
+
+03_Servlet_urlpartten配置
+	定义资源路径的书写方式？
+	如果有两个Servlet，其中一个配置@WebServlet("/demo"),另外一个配置@WebServlet("/*")
+		,那么当浏览器访问 /demo资源时，哪个Servlet会响应？
+
+		路径匹配有精确匹配原则

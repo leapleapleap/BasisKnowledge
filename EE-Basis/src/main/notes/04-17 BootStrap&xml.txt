@@ -1,0 +1,206 @@
+DOM：
+	概念：
+		文档对象模型：
+			把html文档的各个组成部分封装成对象，可以用js代码动态的操作html文档
+
+	分类：
+		核心DOM
+		XMLDOM
+		HTMLDOM
+
+	常用对象:
+		Document:
+			整个文档
+			获取元素对象
+				getElementById()
+				getElementsByTagName()
+				getElementsByClassName()
+				getElementsByName()
+
+			创建元素对象:
+				createElement()
+				createAttribute()
+				createTextNode()
+				createComment()
+
+		Element:
+			标签
+			设置属性
+				setAttribute(属性名,属性值)
+				元素对象名.属性名=属性值
+			移除属性；
+				removeAttribute(属性名)
+		Attribute:
+			属性
+		Text:
+			文本
+		Comment:
+			注释
+		Node:
+			节点，它是其他对象的父级对象
+			添加节点
+				appendChild()
+			删除节点
+				removeChild()
+			替换节点
+				replaceChild()
+			查找父节点
+				parentNode
+			查找子节点
+				firstChild
+				lasChild
+				childNodes
+
+	控制CSS样式：
+		1. 元素对象名.style.样式名称=值；
+		2. 元素对象名.className=值
+
+事件监听机制：
+	事件：
+		在某些组件上发生的操作
+	事件源：
+		事件发生的地方
+	监听器：
+		一段代码
+	注册监听：
+		把事件、事件源、监听器联系到一块
+
+	常用的事件：
+		加载事件：
+			onload:
+				一般设置给window
+
+		点击事件：
+			onclick
+			ondbclick
+
+		焦点事件：
+			onfocus：
+			onblur:
+
+		表单提交事件：
+			onsubmit：
+				阻止表达提交：
+					1.通过js代码注册监听，需要在对应的方法对象中返回一个boolean类型的值来阻止提交
+					2.通过标签属性的方式注册监听:
+						2.1 需要在对应的方法对象中返回一个boolean类型的值来阻止提交
+						2.2 onsubmit="return 方法名()"
+
+		修改事件：
+			onchange
+
+		选中事件：
+			onselected
+
+		鼠标事件；
+		键盘事件；
+
+	如果要获取事件的详细信息，需要在对应的监听函数上声明一个参数来接收详细信息对象；
+
+今日内容：
+	BOOTSTRAP(了解)：
+		是一个前端的框架:
+
+		概念:
+		响应式布局:
+		样式:
+		组件:
+		插件:
+
+		案例:
+
+	Xml的入门学习(掌握):
+		概念:
+		语法:
+
+02_Bootstrap_概述
+	什么是Bootstrap？
+		前端半成品软件，对HTML、CSS、JS的封装
+	为什么要使用Bootstrap？
+		简化书写，提高开发效率
+
+	特点：
+		响应式布局
+			根据不同的分辨率，显示不同的效果
+
+03_Bootstrap_快速入门
+	使用bootstrap的步骤(ctrl+c;ctrl+v)？
+		1.需要把bootstrap框架导入到项目中(就是把css、js文件复制到自己的项目中)
+		2.在自己的html文档中，引入bootstrap的css文件和js文件
+		3.使用boostrap提供的一些样式。。。
+
+04_Bootstrap_栅格系统_入门
+	栅格系统：
+		通过百分比的方式来设置宽度；
+
+	响应式布局实现的原理？
+		bootstrap会把任何一行分隔成12个小的格子
+		如果指定了一个元素在该行中占有的格子数目，那也就是指定了它的宽度
+
+	格栅系统的使用步骤？
+		1.定义容器
+		2.定义行
+		3.定义元素
+			指定每个元素占有的格子数目
+
+05_Bootstrap_栅格系统_注意事项
+	容器container和容器container-fluid的区别？
+	如果一个row中的元素所占格子的综合超过12，会发生什么？
+	格栅属性的兼容方向？
+		向上兼容
+
+06_Bootstrap_全局CSS样式_按钮&图片
+	常见的按钮属性？
+		btn-Xxx
+	常见的图片属性？
+		img-Xxx
+
+07_Bootstrap_全局CSS样式2_表格&表单
+	常见表格相关属性？
+	form-group属性和form-control属性怎么用？
+
+08_Bootstrap_组件_导航条&分页条
+	常见导航条属性？
+	快速读html代码的方式
+
+09_Bootstrap_插件_轮播图
+
+10_案例_黑马旅游网_分析
+
+11_案例_黑马旅游网_页眉部分
+
+12_案例_黑马旅游网_主体&页脚部分
+
+XML:
+	概念：
+	语法；
+
+02_xml_概述
+	什么是xml？
+		可扩展标记语言：
+			标记都是自定义的；
+	xml的作用？
+		存储数据：
+			配置文件
+			网络中传输xml文件
+
+03_xml_快速入门
+	xml文档的后缀名？
+	第一行内容？
+		必须是文档声明
+	根标签可以有多个吗？
+		不行
+	区分大小写么？
+		区分
+
+04_xml_组成部分
+	组成部分？
+		文档声明
+		指令
+		标签
+		属性
+		文本
+	如果第一行不写 encoding属性，浏览器会用什么编码表解码？
+		ISO-8859-1;
+	xml中怎么写 类似于java代码的特殊文本？
+		<![CDATA[数据]]>

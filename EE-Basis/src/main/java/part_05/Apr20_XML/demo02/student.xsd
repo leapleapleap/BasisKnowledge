@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="student"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="student" elementFormDefault="qualified">
+    <xsd:element name="students" type="studentsType"/> <!-- students元素，类型为studentType类型 -->
+    <xsd:complexType name="studentsType"> <!-- 定义studentsType类型 -->
+        <xsd:sequence> <!-- 按照顺序出现 -->
+            <!-- student元素，类型为studentType类型，最小0个、最大没有限制 -->
+            <xsd:element name="student" type="studentType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="studentType"> <!-- studentTpye类型定义 -->
+        <xsd:sequence> <!-- 按照顺序出现 -->
+            <xsd:element name="name" type="xsd:string"/> <!-- name元素，字符串类型 -->
+            <xsd:element name="birthday" type="ageType" /> <!-- birthday元素，自定义ageType类型 -->
+            <xsd:element name="sex" type="sexType" /> <!-- sex元素，自定义sexType类型 -->
+        </xsd:sequence>
+        <xsd:attribute name="number" type="numberType" use="required"/> <!-- number属性，numberType类型，必须使用 -->
+    </xsd:complexType>
+    <xsd:simpleType name="sexType"> <!-- sexType简单类型 -->
+        <xsd:restriction base="xsd:string"> <!-- 字符串类型 -->
+            <xsd:enumeration value="male"/> <!-- 枚举 -->
+            <xsd:enumeration value="female"/> <!-- 枚举 -->
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ageType">
+        <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/> <!-- 最小值 -->
+            <xsd:maxInclusive value="256"/> <!-- 最大值 -->
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="numberType">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="S_\d{4}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema> 

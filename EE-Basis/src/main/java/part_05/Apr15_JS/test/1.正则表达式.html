@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        var regexp1 = new RegExp("\\d*\\w{6,12}");
+        var regexp2 = /^\d*\w{6,12}$/;
+        var s = "8551802123123123";
+        var b1 = regexp1.test(s);
+        var b2 = regexp2.test(s);
+        console.log(b1);
+        console.log(b2);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

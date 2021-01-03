@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*元素选择器*/
+        p {
+            text-align: center;
+        }
+        span {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<!--设置html展示内容-->
+<p><span id="time">5</span>秒后将自动跳转至首页...</p>
+<!--设置JS属性-->
+<script>
+    // 获取document对象，根据id获取相应的属性对象
+    var time = window.document.getElementById("time");
+    // 设置倒计时秒数
+    var second = 5;
+    // 定义方法，用于修改秒数
+    function fun() {
+        second--;
+        // 到秒数为零后
+        if (second <= 0) {
+            // 获取location对象并修改href属性
+            // window.location.href = "https//www.baidu.com";
+            window.location.href = "http://localhost:63342/FromZeroToHero/JavaEE_Web/Web_Time/_0415_/someones_code/5.%E8%BD%AE%E6%92%AD%E5%9B%BE.html?_ijt=2su0qr6u1rm3llipkg4b2fa0c6";
+        }
+        // 修改秒数，达到倒计时的效果
+        time.innerHTML = second + "";
+    }
+
+    //设置循环计时器
+    setInterval(fun, 1000);
+
+</script>
+</body>
+</html>

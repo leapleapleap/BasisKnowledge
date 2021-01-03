@@ -1,0 +1,1 @@
+alert("javascript是一门脚本语言")

@@ -1,0 +1,216 @@
+BeanUtils:
+	完成数据的自动封装
+        原理：通过反射找到setter/getter方法，来完成封装和获取数据
+            populate(Object obj,Map map);
+
+	相同对象、不同对象之间的数据拷贝
+
+Http响应消息：
+    响应行：
+        协议/版本号 响应状态码 状态
+
+        响应状态码：
+            1xx:服务器在等待浏览器发送信息
+            2xx:响应成功
+            3xx:重定向
+            4xx:浏览器端错误，浏览器的访问路径有问题；
+            5xx:服务器端错误
+
+
+    响应头：一些键值对
+        Content-Type: MIME;ENCODING
+            值：text/html;charset=utf-8
+
+            作用是告诉浏览器，服务器响应的数据格式及用什么编码格式解析这些数据
+
+        Content-Disposition:
+            告诉浏览器，用什么方式打开服务器响应的数据
+                in-line:浏览器中打开，展示内容
+                attachment:以附件的形式进行下载
+    响应空行：
+        分割响应头和响应体
+
+    响应体：
+
+Response:
+	它代表了一次响应
+
+	设置响应状态码:setStatus(int status)
+	设置响应头:setHeader(String key,String value)
+	设置响应体：
+		1.获取流对象:
+			getWriter()
+			getOutputStream()
+		2.通过流对象写数据到浏览器
+
+	服务器响应中文数据给浏览器乱码：
+		原因：
+			服务器编码的格式默认是tomcat的默认编码 iso-8859-1;
+			浏览器解码的格式默认是操作系统的默认编码 gbk；
+		解决：在通过response对象获取输出流对象之前设置contentType
+			response.setContentType("text/html;charset=utf-8");
+
+	请求转发：   它是服务器内部的资源跳转方式
+		1.整个过程中，浏览器只发起了一次请求
+		2.浏览器的地址栏不会发生变化
+		3.可以使用request域来在多个资源之间共享数据
+
+	重定向：    它是服务器外部的资源跳转方式
+		1.整个过程中，浏览器发起了2次请求；
+		2.浏览器地址栏会发生变化
+		3.不可以使用request域共享数据
+
+今日内容：
+	ServletContext：
+		request.getServletContext();
+		this.getServletContext();
+
+	文件下载案例：
+
+	会话技术：
+		浏览器端会话技术；
+			cookie
+		服务器端会话技术：
+			session
+
+15_ServletContext_概述
+	一个Context标签代表服务器上的一个项目；
+
+	ServletContext代表什么？
+		代表一个web项目
+	ServletContext有什么作用？
+		获取文件的MIME类型
+		共享数据：整个web项目内
+		可以获取资源文件在服务器上的真实路径；
+
+
+16_ServletContext_获取
+	获取ServletContext对象的两种方式？
+	一个Web应用程序中，有几个ServletContext对象的存在？
+		只有一个ServletContext对象的存在；
+
+17_ServletContext_功能_获取MIME类型
+	什么是MIME？
+		互联网通信中，定义的文件的格式类型
+	MIME类型的格式？
+		大类型/小类型
+		text/html
+
+	如何获取文件的MIME类型？
+		getMimeType();
+		**********************
+			获取mime类型，只和文件的后缀名有关系；
+
+18_ServletContext_功能_域对象
+	request随着一次请求的接收创建，随着该请求的处理完毕request会消失
+	ServletContext随着服务器的启动而创建，随着服务器的关闭而消亡
+
+19_ServletContext_功能_获取文件服务器路径
+	"/"对应的是什么路径？
+		web目录(编码阶段的目录)，web项目根目录(部署到tomcat服务器上)
+	如何访问web目录下的资源？
+		/资源名称
+	如何访问WEB-INF目录下的资源？
+		/WEB-INF/资源名称
+	如何访问src目录下的资源？
+		/WEB-INF/classes/资源名称
+	http://localhost:8080/
+
+20_案例_文件下载_分析
+	浏览器能不能直接解析图片和视频？
+	如何指定浏览器打开资源的方式？
+	点击一个超链接去下载资源，服务器如何能知道要下载那个资源？
+
+21_案例_文件下载_代码实现
+	需要特殊设置几个头信息？
+		content-type
+		content-disposition
+	设置响应头信息的代码在什么时候写？
+		需要在设置响应体消息之前书写！！！
+
+22_案例_文件下载_中文文件名问题
+	BASE64Encoder从jdk8迁移到jdk9被Base.Encoder替代；
+	BASE64Decoder从jdk8迁移到jdk9被Base.Decoder替代；
+
+02_会话技术_概述
+	一次会话什么时候开始？什么时候结束？
+	会话技术能干什么？
+		在一次会话的多次请求间共享数据
+	会话技术分类？
+		Cookie；
+		Session；
+
+03_会话技术_Cookie_快速入门
+
+	Cookie会话技术把要共享的数据存储在哪里了？
+		存储到浏览器端；
+
+	Cookie的使用步骤？
+
+04_会话技术_Cookie_原理分析
+	服务端发送Cookie到浏览器，本质上做了什么？
+		响应头：
+			Set-Cookie;
+
+	浏览携带Cookie信息到服务器，本质上做了什么？
+		请求头：
+			Cookie：
+
+05_会话技术_Cookie_细节1_发送多个Cookie
+	发送多个Cookie，本质是做了什么？
+		添加多个Set-Cookie响应头；
+	浏览器请求的时候，怎么把多个cookie带给服务器？
+		添加一个Cookie请求头，但是 Cookie: 键=值;键=值...
+
+	*******************
+		如果服务器给浏览器响应键名相同的cookie，那么后面添加的值会替换前面添加的值
+
+06_会话技术_Cookie_细节2_Cookie存活时间
+	默认情况下，浏览器怎么存储Cookie？
+		存储内存中
+	如何指定Cookie的存活时间？
+		Cookie:
+			setMaxAge(int amount);//秒
+			正数：
+				持久化的存储到硬盘中，并且指定存活的时间，超过该时间，cookie会自动删除
+			0：
+				删除cookie
+			负数：
+				默认
+
+07_会话技术_Cookie_细节3_Cookie存储中文
+	Tomcat8能不能直接存储中文？
+
+08_会话技术_Cookie_细节4_Cookie共享(理解)
+	默认情况下，Cookie能不能在多个Web项目中共享？
+	如何设置同一服务器上多个项目之间Cookie共享？
+		setPath(Sting path)
+			那么这cookie只能在访问该路径及其子路径的时候才会携带
+				设置了/day16
+				只有访问 /day16 或者 /day16/*
+
+	如何设置不同服务器上Cookie共享？
+		setDomain(String domainName)
+
+	**************************
+		浏览器携带cookie信息给服务器，是浏览器的行为：
+		setPath("/")其实需要携带一些信息给浏览器
+			Set-Cookie:键值对;path=路径
+
+09_会话技术_Cookie_特点&作用
+	cookie的大小和个数有没有限制？
+		有：
+			4KB；
+		个数：
+			20；
+
+	不安全：
+		不会使用cookie共享重要的  隐私的数据；
+
+10_会话技术_Cookie_案例_分析
+	1. 访问一个Servlet，如果是第一次访问，则提示：您好，欢迎您首次访问。
+	2. 如果不是第一次访问，则提示：欢迎回来，您上次访问时间为:显示时间字符串
+
+
+11_会话技术_Cookie_案例_代码实现
+	Cookie里面能不能有空格？如何处理？

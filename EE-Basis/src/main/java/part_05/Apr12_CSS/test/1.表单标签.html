@@ -1,0 +1,86 @@
+<!--说明文件的类型-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--定义html文件的编码格式-->
+    <meta charset="UTF-8">
+    <title>表单标签</title>
+</head>
+<body>
+    <!--
+        表单form
+            action发送表单内容到
+            method发送方式
+    -->
+    <form action="#" method="post">
+        <!--
+            lable标签：文字内容的修饰，for属性与input表单项的id属性配合→点击文字后自动跳转至输入框位置
+            input标签：表单项标签
+                type属性：表单项的呈现方式，如单选、复选、密码、文本、文件等方式
+                name属性：只有指定name属性后才能将输入的内容发送出去（form标签与其的配合：若没有被form标签围起、或没有name属性，则输入内容不能被提交）
+                id属性：与lable标签的for属性配合使用
+                placeholder属性：文本框的提示内容，灰色显示，当文本框输入内容后消失
+                checked属性：type为单选与复选框是若有checked属性，则默认选择该项
+                value属性：发送表单信息是或发送value值（单选、复选表单没有定义value属性则默认发送"on",若定义value则在发送时会发送value值）
+
+
+        -->
+        <lable for="username">用户名</lable>:<input type="text" name="username" id="username" placeholder="username"><br/>
+        性别:<input type="radio" name="gender" checked="checked">男<input type="radio" name="gender">女<br/>
+        爱好：<input type="checkbox" name="hobby" value="阅读">阅读<input type="checkbox" name="hobby" value="运动">运动<input type="checkbox" name="hobby" value="电影">电影<br/>
+        文件:<input type="file" name="file">
+        隐藏域：<input type="hidden" name="id" value="aaa"><br/>
+
+        <!--
+            html5新特性
+                type属性为
+                    color：取色器
+                    date：为日期（年月日）
+                    datetime-local：为日期（年月日时分秒）
+                    Email：邮件（会做简单的正则判断）
+                    number：数字选择器
+        -->
+        取色器:<input type="color" name="color"><br/>
+        生日：<input type="date" name="birthday"><br/>
+        生日：<input type="datetime-local" name="birthday"><br/>
+        邮件：<input type="email" name="email"><br/>
+        年龄：<input type="number" name="birthday"><br/>
+
+        <!--
+            select列表标签
+                option列表项标签
+                    value属性：指定发送的内容
+
+        -->
+        省份：<select name="province">
+                <option value="">--请选择--</option>
+                <option value="1">北京</option>
+                <option value="2">上海</option>
+                <option value="3">广州</option>
+                <option value="4">天津</option>
+                <option value="5">四川</option>
+                <option value="6">云南</option>
+                <option value="7">陕西</option>
+            </select><br/>
+
+        <!--
+            textarea文本域标签
+                cols：宽
+                rows：高
+        -->
+        自我描述：<textarea cols="30" rows="10" name="description">
+                </textarea><br/>
+
+        <!--
+            按钮：
+            submit标签---提交form表单内容
+            button标签---与JS配合使用
+            image图片标签---图片样式的submit，与submit有同样的功能
+        -->
+        按钮<br/>
+        <input type="submit" value="登录"><br/>
+        <input type="button" value="一个按钮"><br/>
+        <input type="image" src="../img/logo.jpg"><br/>
+    </form>
+</body>
+</html>

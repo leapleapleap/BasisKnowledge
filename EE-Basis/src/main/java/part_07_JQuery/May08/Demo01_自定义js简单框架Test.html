@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/Demo.js"></script>
+
+</head>
+<body>
+    <div id="d1"><p1>div1...</p1></div>
+    <div id="d2">div2...</div>
+    <script>
+        var d1 = $("d1").innerHTML;
+        var d2 = $("d1").innerText;
+        var d3 = $("d2").innerHTML;
+        window.alert(d1);/*<p1>div1...</p1>*/
+        window.alert(d2);//div1...
+        window.alert(d3);//div2...
+    </script>
+</body>
+</html>

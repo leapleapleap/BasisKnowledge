@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function () {
+            //链式编程
+            $("#name").click(function () {
+                $(this).prop("value","请输入信息");
+            }).blur(function () {
+                $(this).prop("value","绑定点击事件");
+            }).mouseenter(function () {
+                alert("鼠标移入了...")
+            }).mouseleave(function () {
+                alert("鼠标移出了...")
+            });
+            $("#btn").click(function () {
+                $("#name").off();
+            })
+        })
+
+    </script>
+</head>
+<body>
+<input id="name" type="text" value="绑定点击事件">
+<input id="btn" type="button" value="清除输入框绑定的事件">
+</body>
+</html>

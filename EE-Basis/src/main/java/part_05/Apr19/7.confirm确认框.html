@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        /*
+            请使用js代码实现：
+              点击清空按钮，在浏览器弹出确认框
+                 如果用户点击取消按钮，则不做任何操作
+                 如果用户点击确认按钮，则清空textarea中用户输入的内容
+        */
+
+        window.onload = function () {
+            var btn = document.getElementById("clear");
+            btn.onclick = clear;
+        }
+        function clear() {
+            var b = confirm();
+            if(b){
+                var comment = document.getElementById("comment");
+                comment.value = ""
+            }
+
+        }
+    </script>
+</head>
+<body>
+意见或建议:<br>
+<!--评论框-->
+<textarea id="comment" cols="50" rows="10" placeholder="相信您的建议，一定会一针见血(不支持富文本)"></textarea>
+<!--清空评论框的按钮-->
+<input id="clear" type="button" value="清空">
+</body>
+</html>

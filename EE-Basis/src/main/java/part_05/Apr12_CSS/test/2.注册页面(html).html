@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+</head>
+<body>
+<!--表单-->
+<form>
+    <!--表格-->
+    <table border="1" cellspacing="1" cellpadding="1" bgcolor="#f0f8ff" align="center">
+        <!--第一行-->
+        <tr>
+            <!--1-1单元格-->
+            <td align="right">
+                <label for="username">用户名</label>:
+            </td>
+            <br/>
+            <!--1-2单元格-->
+            <td>
+                <input type="text" name="username" id="username" placeholder="请输入用户名">
+            </td>
+            <br/>
+        </tr>
+        <!--第二行-->
+        <tr>
+            <!--2-1单元格-->
+            <td align="center">
+                <label for="password">密码</label>:
+            </td>
+            <br/>
+            <!--2-2单元格-->
+            <td>
+                <input type="password" name="password" id="password" placeholder="请输入密码">
+            </td>
+            <br/>
+        </tr>
+        <!--第三行-->
+        <tr>
+            <!--3-1单元格-->
+            <td align="center">
+                <label for="email">email</label>:
+            </td>
+            <br/>
+            <!--3-2单元格-->
+            <td>
+                <input type="email" name="email" id="email" placeholder="请输入邮箱">
+            </td>
+            <br/>
+        </tr>
+        <!--第四行-->
+        <tr>
+            <!--4-1单元格-->
+            <td align="center">
+                <label for="name">姓名</label>:
+            </td>
+            <br/>
+            <!--4-2单元格-->
+            <td>
+                <input type="text" name="name" id="name" placeholder="请输入姓名">
+            </td>
+            <br/>
+        </tr>
+        <!--第五行-->
+        <tr>
+            <!--5-1单元格-->
+            <td align="center">
+                <label for="tel">手机号</label>:
+            </td>
+            <br/>
+            <!--5-2单元格-->
+            <td>
+                <input type="text" name="tel" id="tel" placeholder="请输入手机号">
+            </td>
+            <br/>
+        </tr>
+        <!--第六行-->
+        <tr>
+            <!--6-1单元格-->
+            <td align="center">
+                性别:
+            </td>
+            <!--6-2单元格-->
+            <td>
+                <input type="radio" name="gender" checked="checked">男<input type="radio" name="gender">女<br/>
+            </td>
+        </tr>
+        <!--第七行-->
+        <tr>
+            <!--7-1单元格-->
+            <td align="center">
+                出生日期：
+            </td>
+            <br/>
+            <!--7-2单元格-->
+            <td>
+                <input type="date" name="birthday">
+            </td>
+            <br/>
+        </tr>
+        <!--第八行-->
+        <tr>
+            <!--8-1单元格-->
+            <td align="center">
+                <label for="code">验证码</label>:
+
+            </td>
+            <!--8-2单元格-->
+            <td>
+                <input type="text" name="code" id="code" placeholder="请输入验证码">
+                <input type="image" src="../img/verify_code.jpg">
+            </td>
+            <br/>
+        </tr>
+        <!--第九行-->
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" name="submit" value="submit">
+            </td>
+            <br/>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>

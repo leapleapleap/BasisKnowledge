@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        /*
+            定义函数，获取输入框中的内容，通过构造器的方式生成对象，并在浏览器中弹出提示框，显示对象的内容
+        */
+        function fun1(){
+            //获取用户输入的姓名、年龄、住址等信息
+            var username = document.getElementById("username").value;
+            var birthday = document.getElementById("birthday").value;
+            var address = document.getElementById("address").value;
+
+            //定义构造器
+            function User(username,birthday,address){
+                this.username=username;
+                this.birthday=birthday;
+                this.address=address;
+            }
+            //调用构造器，传递用户输入的信息，创建对象
+            var user = new User(username,birthday,address);
+            //弹出提示框
+            alert("姓名："+user.username+", 年龄："+birthday+", 住址："+address);
+        }
+        /*
+           定义函数，获取输入框中的内容，通过字面量的方式生成对象，并在浏览器中弹出提示框，显示对象的内容
+       */
+        function fun2(){
+            //获取用户输入的姓名、年龄、住址等信息
+            var username = document.getElementById("username").value;
+            var birthday = document.getElementById("birthday").value;
+            var address = document.getElementById("address").value;
+
+            //通过字面量方式创建对象
+            var user ={username:username,birthday:birthday,address:address};
+            //弹出提示框
+            alert("姓名："+user.username+", 年龄："+birthday+", 住址："+address);
+        }
+
+        window.onload=function (ev) {
+            //获取按钮元素对象，绑定点击事件
+            document.getElementById("btn1").onclick=fun1;
+            document.getElementById("btn2").onclick=fun2;
+        }
+    </script>
+</head>
+<body>
+姓名：<input type="text" name="username" id="username"><br>
+年龄：<input type="text" name="birthday" id="birthday"><br/>
+住址: <input type="text" name="address" id="address"><br>
+<input id="btn1" type="button" value="通过构造器方式生成对象，并在提示框中弹出对象信息">
+<input id="btn2" type="button" value="通过字面量方式生成对象，并在提示框中弹出对象信息">
+</body>
+</html>

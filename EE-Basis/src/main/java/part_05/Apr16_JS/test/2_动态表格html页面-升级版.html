@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态表格</title>
+
+    <!--使用CSS调整表格的样式-->
+    <style>
+        /*表格整体样式*/
+        table {
+            /*边框为1个像素的实现*/
+            border: 1px solid;
+            /*外边距：自适应*/
+            margin: auto;
+            /*宽度为500像素*/
+            width: 500px;
+        }
+
+        /*单元格和表头单元格样式*/
+        td, th {
+            /*文本居中*/
+            text-align: center;
+            /*边框为1个像素的实现*/
+            border: 1px solid red;
+        }
+
+        /*div样式*/
+        div {
+            /*文本居中*/
+            text-align: center;
+            margin: 50px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div>
+    <!--设置id文本输入框-->
+    <input type="text" id="id" placeholder="请输入编号">
+    <!--设置姓名输入框-->
+    <input type="text" id="name" placeholder="请输入姓名">
+    <!--设置性别输入框-->
+    <input type="text" id="gender" placeholder="请输入性别">
+    <!--设置添加信息按钮-->
+    <input type="button" value="添加" id="btn_add">
+</div>
+<!--信息表-->
+<table>
+    <!--表信息-->
+    <caption>学生信息表</caption>
+    <!--第一行，表头行-->
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>操作</th>
+    </tr>
+    <!--第二行-->
+    <tr>
+        <td>1</td>
+        <td>令狐冲</td>
+        <td>男</td>
+        <!--给超链接添加 href属性 和 事件-->
+        <td><a href="javascript:void(0);" onclick="delTr(this)">删除</a></td>
+    </tr>
+
+    <tr>
+        <td>2</td>
+        <td>任我行</td>
+        <td>男</td>
+        <!--给超链接添加 href属性 和 事件-->
+        <td><a href="javascript:void(0);" onclick="delTr(this)">删除</a></td>
+    </tr>
+
+    <tr>
+        <td>3</td>
+        <td>岳不群</td>
+        <td>?</td>
+        <!--给超链接添加 href属性 和 事件-->
+        <td><a href="javascript:void(0);" onclick="delTr(this)">删除</a></td>
+    </tr>
+</table>
+
+<script>
+    document.getElementById("btn_add").onclick = function () {
+        //获得文本框输入的内容
+        var id = document.getElementById("id").value;
+        var name = document.getElementById("name").value;
+        var gender = document.getElementById("gender").value;
+
+        //获取table元素对象
+        var table = document.getElementsByTagName("table")[0];
+        //使用innerHTML方法直接拼接tr内容
+        table.innerHTML += "<tr>" +
+                                "<td>"+id+"</td>" +
+                                "<td>"+name+"</td>" +
+                                "<td>"+gender+"</td>" +
+                                "<td><a href=\"javascript:void(0);\" onclick=\"delTr(this)\">删除</a></td>" +
+                           "</tr>"
+    };
+
+    function delTr(obj) {
+        // alert(obj);
+        var table = obj.parentNode.parentNode.parentNode;
+        // alert(table);
+        var tr = obj.parentNode.parentNode;
+        // alert(tr);
+        table.removeChild(tr);
+    }
+
+</script>
+</body>
+</html>

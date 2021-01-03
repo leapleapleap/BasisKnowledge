@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btn").mousedown(function () {
+                $(this).prop("value","鼠标按下了~~~~~~");
+            }).mouseup(function () {
+                $(this).prop("value","使用on绑定点击事件");
+            });
+
+            $("#btn2").on("mouseover",function () {
+                if(!confirm("想要清除前面按钮的绑定事件么？")){
+                    alert("那就别点哦！！！");
+                    return false;
+                }
+                $("#btn").off();
+            })
+        })
+
+    </script>
+</head>
+<body>
+<input id="btn" type="button" value="使用on绑定点击事件">
+<input id="btn2" type="submit" value="使用off解绑点击事件">
+</body>
+</html>

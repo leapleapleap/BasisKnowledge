@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .picture{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <img id="img" class="picture" src="img/banner_1.jpg">
+<script>
+    var num = 1;
+
+    function fun() {
+        num++;
+        if(num>3){
+            num = 1;
+        }
+        var newVar = document.getElementById("img");
+        newVar.src = "img/banner_"+num+".jpg";
+    }
+    setInterval(fun,500);
+
+
+</script>
+</body>
+</html>

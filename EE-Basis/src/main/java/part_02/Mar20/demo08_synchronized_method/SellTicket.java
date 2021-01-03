@@ -9,7 +9,7 @@ public class SellTicket {
         //创建Runnable接口的实现类对象
         RunnableImpl run = new RunnableImpl();
         System.out.println("run:" + run);
-        //run:com.itheima.demo08.Synchronized.RunnableImpl@58ceff1
+        //run:com.itheima.demo07.Synchronized.RunnableImpl@58ceff1
 
         //创建Thread类对象,构造方法中传递Runnable接口的实现类对象
         Thread t0 = new Thread(run);

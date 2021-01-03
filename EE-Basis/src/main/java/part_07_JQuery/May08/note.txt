@@ -1,0 +1,104 @@
+昨日回顾：
+    Filter入门
+        类--->Filter
+        @WebFilter("/*")
+        web.xml <filter>
+    Filter生命周期，执行流程.
+        创建：Tomcat启动    init()
+        销毁：Tomcat关闭    desctory();
+        doFilter(request,response,filterChain);
+
+    Filter拦截路径配置
+        /a.jsp  /myServlet
+        /aa/*
+        *.do *.jsp
+        /*
+
+    Filter拦截方式配置
+        REQUEST(默认)
+        FORWORD
+
+    Filter链
+        注解:类名的字符串大小
+        XML：<filter-mapping>
+
+    登录认证：
+
+    过滤敏感词汇。
+
+    **真实对象 代理对象
+    **JDK动态代理要求
+        真实对象至少实现一个接口。
+        代理对象 真实对象实现了相同的接口，兄弟关系。
+        Object proxy = Proxy.newProxyInctance(真实对象的类加载器，真实对象实现的所有接口，InvocationHandler匿名内部类对象);
+        proxy.xxx();---->invoke()
+
+    Listener概述。
+        Web作用：
+            ServletContextLisener--->监听ServletContext域对象创建和销毁。
+                contextInitionlized();
+                contextDestroy();
+        业务场景
+            tomcat启动之后加载配置文件
+
+    ServletContextListener
+    	作用：监听ServletContext域对象的创建和销毁。
+    	如何定义：
+    		定义类实现ServletContextListener接口，重写接口2个方法。
+    			contextInitionlized() {
+    				//加载配置文件。
+    				String path = ServletContext域对象.getInitParamter("fileName");
+    				//获取输入流
+    				...
+    			}
+
+    		配置：
+    			@WebListener
+    			web.xml
+    				<listener>
+
+    		优化方案：
+    			将配置文件的名称配置全局参数中。
+    			web.xml
+    			<context-param>
+    				<param-name>fileName</param-name>
+    				<param-value>文件路径</param-value>
+    			</context-param>
+
+    JQuery
+    	概述
+    	入门
+    		1.下载
+    		2.引入
+    		3.使用
+    	js对象 jQuery对象转化。
+    		document.getElementById();--->JS对象
+    		document.getElementsByTagName();--->JS对象
+
+    		$("选择器")--->jquery对象；
+
+    		$(js对象);
+    		$("选择器").get(i) / $("选择器")[i];
+    	jq中事件绑定 CSS样式控制
+    		$("选择器").事件方法(function(){
+    		});
+
+    		$("选择器").css("CSS属性名","属性值");
+
+    	选择器
+    		作用：获取页面中指定的元素；
+    		基本选择器：
+    			$("div");
+    			$("#ID属性值");
+    			$(".class属性值");
+    			$("选择器1,选择器2..")
+
+    		层级选择器
+    			$("A B");
+    			$("A > B");
+
+    		属性选择器
+    			$("div[id]")
+    			$("input[name^='news']")
+    			$("input[name$='news']")
+    			$("input[name*='news']")

@@ -6,7 +6,7 @@ import java.util.function.Predicate;
     作用:对某种数据类型的数据进行判断,结果返回一个boolean值
 
     Predicate接口中包含一个抽象方法：
-        boolean test(T t):用来对指定数据类型数据进行判断的方法
+        boolean owner_test(T t):用来对指定数据类型数据进行判断的方法
             结果:
                 符合条件,返回true
                 不符合条件,返回false   */

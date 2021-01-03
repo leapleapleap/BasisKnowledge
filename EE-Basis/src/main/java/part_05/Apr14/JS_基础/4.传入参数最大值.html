@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js基础语法</title>
+    <script>
+        /*  请定义一个函数，求出调用方法时传递的所有参数中的最大值，并返回，传递的参数可以是任意多个整数  */
+        function max() {
+            if(arguments.length==0){
+                return;
+            }
+            var max = arguments[0];
+            for (let i = 1; i < arguments.length; i++) {
+                if(arguments[i]>max){
+                    max=arguments[i];
+                }
+            }
+            return max;
+
+        }
+        //调用函数,在控制台打印输出最大值
+        var maxNum = max(12,21,33,23,111,321);
+        console.log(maxNum);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

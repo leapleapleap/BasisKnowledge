@@ -1,0 +1,17 @@
+<!ELEMENT students (student*) >
+<!ELEMENT student (name,birthday,sex)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT birthday (#PCDATA)>
+<!ELEMENT sex (#PCDATA)>
+<!ATTLIST student number ID #REQUIRED>
+<!--
+    最常见的属性类型:#PCDATA,表示文本类型
+    最常见的设置说明1:#REQUIRED,表示属性是必须的
+    最常见的设置说明2:#IMPLIED,表示属性是可选的
+-->
+
+<!--
+    CDATA:属性值为任意文本数据
+    Enumerated:属性值必须是枚举列表中的一个
+    ID:属性值必须是唯一的,并且属性值不能以数字开头
+-->

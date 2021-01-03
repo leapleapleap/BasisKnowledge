@@ -1,0 +1,214 @@
+BootStrap：
+	概念：
+		是一个 前端框架，封装了css、HTML、js，可提高开发效率
+
+	响应式布局原理：
+		栅格系统：
+			会把每一行分隔为12个小格子，然后指定宽度的时候只要指定该元素占有的格子数目即可
+
+			定义容器：
+			定义行：
+			定义元素：
+
+		最终宽度是百分比；
+
+	常用CSS样式
+	组件
+	插件
+
+XML：
+	概念：
+		可扩展标记语言
+
+	组成：
+		文档声明:
+			<?xml version='1.0' encoding='utf-8'?>
+		指令：
+			可以让xml展示数据(一般不用)
+		标签：
+			自闭和标签；
+			围堵标签
+		属性：
+
+		文本：
+			<![CDATA[数据]]>
+
+	语法注意事项：
+		非常严格的语法：
+			1.严格区分大小写；
+			2.根标签只能有一个；
+			3.围堵标签必须有下半个；
+			4.自闭和标签必须写 /完成闭合；
+
+		xml所有的标签都是自定义的！！！
+
+今日内容:
+	xml约束：
+        对xml文档的内容进行限定，为了让存储数据和解析数据遵循同样的规则
+	xml解析：
+	tomcat入门
+
+05_xml_约束概述
+	什么是约束？
+		一般情况下，一方往xml文档中存储数据，另外一方从xml中读取数据
+
+	学习约束的目的？
+
+06_xml_约束_dtd
+
+	如何引入外部dtd文档？
+		网络中：
+            <!DOCTYPE 根标签名 PUBLIC 别名 "网络中的路径">
+        本地：
+            <!DOCTYPE 根标签名 SYSTEM "本地路径">
+
+	***************
+		1.一个xml文档中只能引入一个dtd文档
+        2.只能对标签做限定，不能对内容做更详细的限定
+
+07_xml_约束_schema
+    文件后缀名：.xsd
+	dtd约束的缺点:
+		不能对标签的内容进行限定
+		只能引入一个dtd文档
+	引入schema约束:
+		<s:students xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			//一般是固定书写；是给xml官方的一个命名空间起别名，为了使用它底下的一个内容：
+			//schemaLocation引入其他的约束文档
+          xmlns:s="http://www.itcast.cn/xml"
+			//给命名空间起别名
+          xsi:schemaLocation="http://www.itcast.cn/xml  student.xsd
+								别名		文档位置
+								"
+			//引入其他的约束文档；文档的位置可以是本地的，也可以是网络上的；
+		>
+
+		引入：
+            第一步：
+                给xml官方的一个命名空间起别名
+                xmlns:xsi 网络中的命名空间
+            第二步：
+                xsi:shemaLocation 命名空间  xsd文档位置
+
+            第三步：
+                给命名空间起别名：
+                xmlns：别名 命名空间
+        特点：
+            可以对文档中的内容做详细的限定
+            同一个文档中可以引入多个xsd约束文档
+
+08_xml_解析_解析方式
+	什么是DOM解析？
+	什么是SAX解析？
+	思想：
+		DOM：
+			一次性把文档的所有内容加载进内存，形成DOM树，可以对该树完成CRUD的操作
+			优点：
+				操作方便，可以CRUD
+			缺点：
+				占内存，效率低一些
+		SAX:
+			逐行读取，每使用完一行，就会把改行占用的内存释放掉
+			优点：
+				占内存非常小，效率高
+			缺点：
+				只能读取
+
+09_xml_解析_常见的解析器
+	jsoup:用来解析html的工具，由于html和xml都是标记语言，所以也可以解析XML
+	DOM4J
+    JAXP
+
+10_xml_解析_Jsoup_快速入门
+	使用jsoup的步骤？
+    解析步骤：
+        1.导包；
+        2.构建document对象
+            Jsoup.parse();
+        3.可以得到Element对象
+            document.getElementsByTag()
+    Document:
+        getElementsByTag(String tageName);
+        getElementsByAttribute(String attributeName);
+        getElementsByAttributeValue(String attributeName,String value);
+        getElementById(String id);
+    Element:
+        getElementsByTag(String tageName);
+        getElementsByAttribute(String attributeName);
+        getElementsByAttributeValue(String attributeName,String value);
+        getElementById(String id);
+        text()
+        html()
+        attr(String key)
+
+11_xml_解析_Jsoup_Jsoup对象
+	parse(String html);
+	parse(File file,String charset);
+	parse(URL url,int timeOutMillis );
+
+12_xml_解析_Jsoup_Document对象
+	Document常用方法？
+		getElementById(String id);
+		getElementsByTag(String tagName);
+		getElementsByAttribute(String attributeName);
+		getElementsByAttributeValue(String attributeName,String value);
+
+	***************************
+		Document继承了Element
+			为了继承Element中的方法
+
+13_xml_解析_Jsoup_Element对象
+	text()文本内容
+	html()标签体
+	attr(String attrName)属性值
+
+14_xml_解析_Jsoup_根据选择器查询
+	id选择器：
+		#id值
+	类选择器：
+		.类名
+	元素选择器：
+		元素名
+	并集选择器：
+		选择器1,选择器2...
+	后代选择器：
+		选择器1 选择器2
+	子选择器：
+		选择器1 > 选择器2
+	属性选择器：
+		元素名[属性名=属性值]
+	伪类选择器：
+		元素名:状态名
+	...
+
+	Elements select(String cssQuery);其中cssQuery应该怎么写？
+
+15_xml_解析_Jsoup_根据Xpath查询
+    快捷查询：
+        1.根据selector选择器来查询
+        2.根据Xpath语法来查询
+            必须根据Document对象构建JXDocument对象
+
+            /:从根目录开始查询；
+            //：在整个文档中查询，不考虑位置
+
+	Xpath是什么？
+		Xml路径表示语言；
+
+	一般使用Xpath做xml的查询；
+		jsoup对Xpath语言做了支持，也就是说它能够解析xpath语言；
+		DOM4J；
+		jaxp:
+		PULL
+
+	使用步骤？
+		/:代表的是根路径开始查询
+			/students/student/name
+
+		//:代表的是在整个文档中查询，不考虑位置
+			//student
+
+		/students/student:
+			找到students标签的子标签为student
+		/students//student:
+			找到students标签下后代为student

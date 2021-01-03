@@ -1,0 +1,255 @@
+javaEE项目结构：
+	项目根目录：
+		静态资源；
+		WEB-INF:
+			classes:
+				存放.class文件；
+			lib：
+				依赖jar包；
+			web.xml:
+				核心配置文件
+Servlet：
+	概念：是一个接口，定义了一个类能够被web服务器执行的规则：
+
+	自定义Servlet并被服务器访问：
+		1.自定义类，实现Servlet接口；
+		2.重写service方法；
+		3.在web.xml中配置：
+			<servlet>
+				<servlet-name>起名字</servlet-name>
+				<servlet-class>servlet的全类名</servlet-class>
+			</servlet>
+			<servlet-mapping>
+				<servlet-name>servlet的名字</servlet-name>
+				<url-pattern>访问路径(资源路径)</url-pattern>
+			</servlet-mapping>
+
+		4.浏览器访问：
+			http://localhost:8080/项目虚拟目录/资源访问路径
+
+	Servlet生命周期：
+		init()
+			在servlet被创建的时候调用；
+			默认： servlet在用户第一次访问时被创建
+			修改：
+				<servlet>
+					<load-on-startup>整数</load-on-startup>
+				</servlet>
+
+				正数： 服务器启动则创建
+				负数： 第一次访问时创建
+				******************************
+					一个servlet在服务器中只有一个对象
+
+			只会执行一次！！
+
+		service()
+			每一次用户访问都会执行
+			会执行多次
+
+		destory()
+			在服务器正常关闭，servlet被销毁之前调用
+			只调用一次
+
+		*************
+        由于多个用户访问同一个资源，是同一个对象提供服务，
+        成员变量会有线程安全问题，建议不要定义成员变量
+
+	其他方法：
+		getConfig()
+			获取servlet配置信息
+
+		getServletInfo()
+			获取servlet的其他信息
+
+	注解配置方式：
+		@WebServlet:
+			String[] value:
+			String[] urlpatterns:
+
+			这两个属性不管给哪个赋值，tomcat服务器都会把它当做资源访问路径来使用
+
+	Servlet继承体系：
+		Servlet:
+			--GenericServlet:抽象类
+				除了service方法，其他的方法都做了空实现
+				--HttpServlet：
+					对http协议相关操作做了封装
+
+		自定义的servlet都会继承HttpServlet，重写 doGet()和doPost方法；
+
+	urlPattern的配置：
+		/xxx;
+		/xxx/xxx;
+		/*
+		*.do;
+
+		tomcat服务器做资源路径的匹配时，有精确匹配原则；
+
+今日内容：
+	http协议；
+	Request：
+	登录案例：
+
+04_HTTP_概述
+	什么是Http协议？
+		超文本传输协议：http可以传输视频、音频、文本。。。
+	http协议有什么特点？
+		1.基于tcp/ip的高级应用协议
+		2.默认端口号是80；
+		3.基于请求/响应的协议，每一次请求唯一对应一次响应
+	http1.0和http1.1版本的区别？
+		1.0：每发送一次数据，都会建立连接、使用连接、释放资源
+
+		1.1：
+			在某一段时间内，即使数据传送完毕，也不会释放资源，如果超了这段时间，才会去释放资源
+			在这一段时间内，所有的请求都可以共用一个连接
+
+			这个时间可以在服务器端设置，一般情况下，设置的是0
+
+		1.2：
+			可以在同一个连接上，同时发送多个请求的数据，在服务器端收到数据后，对数据进行整合，
+			从而提高数据的传输效率
+
+05_HTTP_请求消息_请求行
+	请求消息体的组成部分？
+		请求行、请求头、请求空行、请求体
+
+	请求行的组成？
+		请求方式 URL 协议/版本号
+	get请求和post请求方式的区别？
+
+	*****************
+    tcp保证了两台计算机之间可以传输数据
+    http定义数据的传输格式！！！！
+
+06_HTTP_请求消息_请求头&请求体
+	User-Agent头传递的信息？
+		可以传递浏览器的版本信息；
+	Referer头传递的信息？
+		可以传递该访问从哪里来；
+        作用：统计、防盗链
+	请求空行的作用？
+		分割请求头和请求体
+
+07_Request_原理
+	Request对象是谁创建的？
+		tomcat服务器
+	Request对象里面有什么内容？
+		请求消息
+
+08_Request_继承体系
+	顶层接口是谁？
+		ServletRequest:接口
+			--HttpServletRequest:接口
+				--RequestFacad
+
+	实现类是谁提供的？
+
+09_Request_获取请求行数据_方法介绍
+	获取虚拟目录？
+	获取Servlet路径？
+	获取请求的URI？
+	获取请求的URL？
+
+10_Request_获取请求行数据_代码演示
+	get请求后面如果有多个参数，应该怎么写？
+		用 & 符号分隔开
+	什么是URL？
+		统一资源定位符：
+			http://localhost:8080/day14/demo1
+
+	什么是URI？
+		统一资源标识符：
+			/day14/demo1  protoco
+    URI:共和国
+    URL:中华人民共和国
+
+11_Request_获取请求头数据
+	怎么获取指定指定头的值？
+		String getHeader(String headerName);
+	怎么获取所有的请求头名字？
+		Enumeration getHeaderNames();
+
+12_Request_获取请求体数据（了解）
+	获取请求体的数据步骤？
+
+	getReader();获取到字符流，它一般用来操作文本数据；
+	getInputStream();获取字节流，一般用来操作视频，图片，音频等数据；
+	getQueryString()
+	//username=zhangsan&birthday=18&gender=male&birthday=18&gender=male&birthday=18&gender=male
+
+	checkbox:
+		name:hoby;
+		爬山
+		下海
+		过油锅
+
+13_Request_获取请求参数通用方式介绍
+	获取指定参数名称的值？
+	获取指定参数名称的值的集合？
+	获取所有参数名称？
+	获取所有参数名和值的集合？
+
+14_Request_获取请求参数通用方式演示
+
+15_Request_获取请求参数中文乱码问题处理
+	post请求乱码怎么解决？
+		request.setCharacterEncoding("utf-8");
+		乱码原因：
+			浏览器按照html中  <meta charset="UTF-8"> 进行编码；
+			tomcat默认会使用 iso-8859-1来解码；
+
+		解决乱码的手段：
+			让tomcat按照浏览器编码的格式来进行解码；
+
+16_Request_请求转发
+	什么是转发？
+		服务器内部的资源跳转
+	转发的步骤？
+		第一：获取转发器：
+				request.getRequestDispatcher("资源路径");
+		第二：调用转发器的forward(request,response);
+
+	请求转发到另外一个资源后，浏览器地址栏的请求资源有没有发生变化？
+		没有
+	能不能把一个请求转发到当前服务器的外部资源？
+		不能
+	浏览器端发起了几次请求？
+		一次；
+
+17_Request_共享数据(域对象)
+	一个request对象代表几个请求？
+		代表一个请求
+	如何往request域中放数据？
+		setAttribute(String key,Object value)
+	如何从request域中取数据？
+		getAttribute(String key)
+	如何从request域中移除数据？
+		removeAttribute(String key)
+
+	***************
+		request域中的数据只能在一次请求中共享，多次请求中不能共享；
+
+18_Request_获取ServletContext
+	getServletContext();
+
+19_登录案例_需求
+	涉及到哪些技术？
+		前端：
+			html;
+
+		服务器：
+			servlet：
+			request:
+			response;
+
+		数据库：
+			mysql；
+			jdbc:
+			druid;
+			JDBCTemplate;
+
+20_登录案例_分析
+	操作数据库的代码在哪里写？
+	如果登录成功，需要转发到SuccessServlet中，那么这个username怎么从LoginServlet传递给SuccessServlet？

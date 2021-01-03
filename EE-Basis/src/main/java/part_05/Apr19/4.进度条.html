@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .back_box{
+            width: 300px;
+            height: 30px;
+            border: 3px solid #000;
+        }
+        #schedule_bar{
+            background-color: red;
+            float: left;
+            height: 100%;
+            text-align: center;
+            line-height: 150%;
+        }
+    </style>
+
+    <script type="text/javascript">
+        /*
+        当点击“begin” 按钮后，红色的进度条宽度会不断增长，进度百分比也要以每秒1%的速度增长；
+	    当进度达到100%后，停止增长。
+        */
+        var num = 0;
+        window.onload = function () {
+            var button = document.getElementById("begin");
+            button.onclick = function () {
+                setInterval(invoke,1000);
+            }
+        };
+
+        function invoke() {
+            num++;
+            var bar = document.getElementById("schedule_bar");
+            var schedule = document.getElementById("schedule");
+            if(num <=100){
+                bar.style = "width: "+num+"%;";
+                schedule.innerText = num+"%"
+            }
+        }
+    </script>
+
+</head>
+<body>
+<button id="begin">begin</button>
+<!--进度条的背景框-->
+<div class="back_box">
+    <!--红色进度条-->
+    <div id="schedule_bar" style="width: 0%;" ></div>
+</div>
+<!--当前进度百分比-->
+<p id="schedule">0%</p>
+
+</body>
+</html>

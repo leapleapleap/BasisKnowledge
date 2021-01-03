@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="open_btn" type="button" value="打开窗口">
+<input id="close_btn" type="button" value="关闭窗口">
+<script>
+    var open_btn = document.getElementById("open_btn");
+    var newWindow;
+    open_btn.onclick = function () {
+        newWindow = window.open();
+        window.focus();
+    };
+    var close_btn = document.getElementById("close_btn");
+    close_btn.onclick = function () {
+        newWindow.close();
+    }
+
+</script>
+</body>
+</html>

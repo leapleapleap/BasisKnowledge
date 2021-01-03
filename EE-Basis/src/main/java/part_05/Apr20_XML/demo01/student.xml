@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<!--引入外部(本地)DTD约束-->
+<!DOCTYPE students SYSTEM "student.dtd">
+
+<students>
+	<student number="itcast_0001">
+		<name>tom</name>
+		<birthday>18</birthday>
+		<sex>male</sex>
+	</student>
+	
+</students>

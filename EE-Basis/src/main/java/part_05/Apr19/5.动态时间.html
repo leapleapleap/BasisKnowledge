@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        /*
+        在id为date_time的元素上显示时间，每秒钟更新一次
+        */
+
+        window.onload = function () {
+            setInterval(time,1000);
+        };
+        function time() {
+            var div = document.getElementById("date_time");
+            var datetime = new Date();
+            div.innerText= datetime.toLocaleString();
+        }
+    </script>
+</head>
+<body>
+<div id="date_time"></div>
+
+</body>
+</html>

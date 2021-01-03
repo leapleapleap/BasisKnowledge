@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var a = 3;
+    var newA = a++;
+    document.write(a + "<br/>");
+    document.write(newA + "<br/>");
+
+    var b = "123";
+    document.write(+b + "<br/>");
+    document.write(typeof (+b) + "<br/>");
+
+    var c = "123abc";
+    document.write(+c + "<br/>");
+    document.write(typeof (+c) + "<br/>");
+
+    var d = true;
+    document.write(+d + "<br/>");
+    document.write(typeof (+d) + "<br/>");
+
+    var e = false;
+    document.write(+e + "<br/>");
+    document.write(typeof (+e) + "<hr color='red' size='5px'/>");
+
+    var num1 = 3;
+    var num2 = 4;
+
+    document.write((num1 + num2) + "<br/>");
+    document.write((num1 - num2) + "<br/>");
+    document.write((num1 * num2) + "<br/>");
+    document.write((num1 / num2) + "<br/>");
+    document.write((num1 % num2) + "<br/>");
+    document.write("<hr color='red' size='5px'/>");
+    var f = 5;
+
+    f = 6;
+    document.write(f + "<br/>");
+    f += 1;
+    document.write(f + "<br/>");
+    document.write("<hr color='red' size='5px'/>");
+
+    var str1 = "123";
+    var str2 = "234";
+    var str3 = "abcd";
+    var str4 = "abcc";
+    var num3 = 123;
+    var bo1 = true;
+    document.write((str1 == str2) + "<br/>");//false
+    document.write((str1 == num3) + "<br/>");//true
+    document.write((str1 >= bo1) + "<br/>");//true
+    document.write((str1 === num3) + "<br/>");//false
+    document.write((str3 >= str4) + "<br/>");//true
+    document.write("<hr color='red' size='5px'/>");
+
+    document.write((bo1 && num3) + "<br/>");
+    var str5 = "a";
+    document.write((str5 || num3) + "<br/>");
+    var num4 = NaN;
+    document.write((num4 && str5) + "<br/>");
+
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+常用对象：
+	正则表达式：
+		作用：
+			定义字符串的组成规则；
+            \d ------> 单个数字字符
+            \w ------> 单个单词字符
+            * ------> 任意多次
+            + ------> 至少一次
+            ？ ------> 0次或1次
+            {m,n} ------> 至少m次，最多n次
+            ^ ------> 开始符号
+            $ ------> 结束符号
+
+	RegExp:
+		创建方式：
+			new RegExp("正则表达式")
+			/正则表达式/
+
+		test(字符串)
+
+	Global：
+		全局对象，使用它的方法，不需要创建对象，直接调用即可
+		是因为我们自己写的代码也属于这个Global对象
+		浏览器的js解析器默认提供了一个全局对象 window
+
+		encodeUri():把字符按照指定的编码格式转换成字节，再把字节转化成16进制表示形式，用%隔开
+		encodeUriComponent()
+		decodeUriComponent()
+		decodeUri()
+
+		parseInt()
+		isNaN()
+			NaN六亲不认
+		eval()
+			解析字符串形式的js代码，并执行
+
+DOM简单学习：
+	DOM是用来控制html文档内容
+	获取元素对象：
+		getElementById()
+	修改属性：
+		元素对象名.属性名=属性值
+
+	属性：
+		innerHTML
+		innerText
+
+事件简单学习：
+	在一些标签上，发生一些事，触发一些代码的执行
+	通过事件绑定可以把标签，事件和代码联系到一块
+		1.在标签内，使用 事件名="一段代码"
+		2.把一段代码用一个方法包装，使用js代码获取标签对应的元素对象，通过：
+			元素对象名.事件名=方法
+
+BOM对象：
+	浏览器对象模型，它的出现是为了让程序员通过代码来操作浏览器；
+
+	Window：
+		方法：
+			弹出框方法：
+				alert()
+				confirm()
+					可以返回一个boolean值，代表用户点击的是确定还是取消
+				prompt()
+
+			打开和关闭：
+				open():
+					返回一个Window对象，代表新的窗口
+				close()
+					谁调用我，我关闭谁
+			定时器：
+				setTimeOut()
+				setInterval()
+				clearTimeOut()
+				clearInterval()
+
+		属性：
+			location:
+			history:
+			navigator:
+			screen:
+			document:
+			console:
+			。。。
+
+	Location：
+		刷新：
+			reload()
+		执行url：
+			href
+
+	History：
+		length：
+			获取当前窗口的历史浏览记录个数
+		forward()
+		back()
+		go(值)：
+			负数代表后退
+			整数代表前进
+
+	Navigator：
+
+	Screen：
+
+
+今日内容:
+	DOM:
+		可以控制html的内容
+
+		元素对象增删改查
+		元素对象的属性设置
+		元素对象的样式控制
+
+	事件:
+		常用事件
+
+	案例：
+		动态表格
+		表单验证
+
+15_DOM_概述
+	什么是DOM？
+		文档对象模型。可以控制html的内容
+	DOM分类？
+	核心DOM对象都有哪些？
+		Document:文档
+		Element:标签
+		Attribute:属性
+		Text:文本
+		Comment:注释
+
+		Node:
+			节点，是其他类型的父元素
+
+16_DOM_Document对象_获取Element方法
+	如何获取Element对象？
+		getElementById() 一个Element对象
+		getElementsByTagName() 一个数组
+		getElementsByClassName() 一个数组
+		getElementsByName() 一个数组
+
+17_DOM_Document对象_创建DOM对象
+	如何创建一个Element对象？
+
+	通过document对象我可以创建其他的DOM对象
+
+18_DOM_Element对象
+	如何给Element添加属性？
+		setAttribute(属性名,属性值)
+	如何删除属性？
+		removeAttribute(属性名)
+
+19_DOM_Node对象
+	给当前节点添加子节点的方法？
+		appendChild()
+	删除当前节点的一个子节点的方法？
+		removeChild()
+	替换当前节点的一个子节点的方法？
+		replace()
+	如何让a标签点击之后不发生跳转？
+		href="javascript:void(0)"
+	如何获取Element对象的父节点？
+		parentNode属性
+
+	firstChild
+	lastChild
+	childNodes
+
+20_案例4_动态表格_添加
+	添加一行的步骤？
+
+21_案例4_动态表格_删除
+	delTr(this):
+		this--->点击的是哪个，它代表的就是哪个
+
+	如果定义table的时候没有写tbody，那么浏览器在渲染table标签时，
+	会自定提供一个tbody，它table的内容包裹起来；
+
+22_HTMLDOM_innerHTML
+
+23_HTMLDOM_样式控制
+	通过style属性设置样式的格式？
+		元素对象名.style.样式名称=值
+	如果样式键的名称有 - 符号链接，应该怎么写？
+	通过className属性定义样式的格式？
+		className=类名
+
+25_事件_概述
+	什么是事件？
+		发生的操作
+	什么是事件源？
+		操作发生的地方
+	什么是监听器？
+		一段代码
+
+	什么是注册监听(事件绑定)？
+		把事件，事件源，监听器联系到一起；
+
+26_事件_常见事件演示
+	onload事件一般在哪里加？
+		一般加给window这个对象
+
+	当有事件后，怎么获取该事件的详细信息？
+		这个方法会被js解析器调用，调用的时候会传递参数(封装的就是事件的详细信息)进来
+		元素对象名.事件名  = function(event){
+			通过event来获取事件的详细信息
+		}
+
+	onsubmit事件添加给谁？
+		添加给表单(form)对象
+	onsubmit事件如何阻止表单提交？
+		1.对应的function需要返回一个boolean类型的值，如果是true，则提交，如果是false则不提交；
+		2.如果在标签体上通过 onsubmit="代码"的方式绑定事件；
+			return 方法名();
+
+27_案例5_表格全选
+
+28_案例6_表单检验

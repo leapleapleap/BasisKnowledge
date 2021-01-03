@@ -1,0 +1,177 @@
+今日内容:
+	解析注解:
+	数据库:
+		安装..
+		卸载..
+		启动..
+		关闭..
+		SQL：
+			DDL
+			DML
+			DQL
+			DCL
+
+17_注解_解析注解
+	注解使用的步骤？
+
+18_注解_案例_简单的测试框架
+
+3_数据库的基本概念
+	什么是数据库？
+	使用数据库的特点？
+
+4_常见的数据库软件介绍
+	常见数据库软件？
+		关系型数据库；
+			mysql,oracle,sqlserver...
+		非关系型数据库；
+			redis,MongoDB...
+
+6_MySQL的卸载
+	通过控制面板把Mysql软件卸载后，还要删除什么东西？？
+		c:\ProgramData\MySql
+
+7_MySQL服务启动和关闭
+	命令方式？
+
+8_MySQL登录和退出
+	怎么登陆本地数据库服务？
+	怎么登陆其他电脑的数据库服务？
+
+9_MySQL目录结构
+	数据库软件、数据库、表、数据记录之间的关系？
+
+	数据库软件：
+		本身是个软件，它可以管理多个数据库
+	数据库：
+		就是个文件夹，它可以管理多张表
+	表：
+		就是一个文件，它可以管理多条数据记录
+
+10_SQL基本概念
+	什么是SQL？
+
+11_SQL通用语法
+	一条SQL语句以什么结尾？
+	sql语句区分大小写么？
+
+	单行注释？
+	多行注释？
+
+12_SQL分类
+	DDL是什么？
+		对数据库和表整体进行增删改查的操作
+	DML是什么？
+		对表中的数据进行增删改的操作
+	DQL是什么？
+		对表中的数据进行查询操作
+	DCL是什么？
+		跟权限相关
+
+13_DDL_操作数据库_创建&查询
+
+	怎么查询现存的所有数据库？
+	如何创建数据库？
+
+	练习：
+		show databases;
+		create database if not exists db1 character set utf8;
+		show databases;
+		show create database db1;
+
+14_DDL_操作数据库_修改&删除&使用
+	怎么修改数据库的编码？
+	怎么删除数据库？
+	怎么查询正在使用的数据库名称？
+	怎么使用指定数据库？
+
+	练习：
+		create database if not exists db2 character set gbk;
+		show create database db2;
+		alter database db2 character set utf8;
+		show create database db2;
+		select database();
+		use db2;
+		select database();
+		drop database db2;
+		show databases;
+
+15_DDL_操作表_查询
+	怎么查询所有表名称？
+		show tables
+	怎么查询表的结构？
+		desc(description) 表名;
+
+16_DDL_操作表_创建
+	创建表的格式？
+	Mysql中:
+		整数是什么类型？---int
+		小数是什么类型？---double
+		日期是什么类型？---date
+		日期时间是什么类型？---datatime
+		时间戳是什么类型？---timestamp
+		字符串是什么类型？---varchar
+		timestamp类型有什么特点？
+			如果不给赋值，则使用系统当前的时间
+
+	练习：
+		use db1;
+		show tables;
+		create table student(
+			id int,
+			name varchar(32),
+			birthday int,
+			score double(4,1),
+			birthday date,
+			insert_time timestamp
+		);
+
+		show tables;
+		desc student;
+
+17_DDL_操作表_删除
+
+	怎么复制表？
+		create table 新表名 like 旧表名
+	怎么删除表？
+		drop table if exists 表名
+
+18_DDL_操作表_修改
+	怎么修改表的名称？
+	怎么修改表的字符集？
+	怎么添加一列？
+	怎么同时修改列的名称和类型？
+	怎么删除一列？
+
+	练习：
+		select database();
+		alter table student rename to stu;
+		show tables;
+		show create table stu;
+		alter table stu character set gbk;
+		show create table stu;
+		alter table stu character set utf8;
+		alter table stu add gender varchar(2);
+		desc stu;
+		alter table stu change gender sex varchar(10);
+		desc stu;
+		alter table stu modify sex varchar(32);
+		desc stu;
+		alter table stu drop sex;
+		desc stu;
+
+20_DML_添加数据
+	添加数据格式？
+	如果表名后不写列名，默认是什么情况？
+
+	***************
+		添加数据时，列名和值需要一一对应！！
+
+21_DML_删除数据
+	删除数据的格式？
+	如果不加条件，默认什么情况？
+	truncate table 表名--->什么意思？
+
+22_DML_修改数据
+	修改数据记录的格式？
+	不加where条件，默认什么情况？

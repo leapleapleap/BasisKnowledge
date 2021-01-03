@@ -1,0 +1,218 @@
+ServletContext:
+	它可以代表一个web项目:
+	作用：
+		1.可以获取文件的MIME类型；
+			getMimeType(String filename);
+			只和文件名相关
+		2.可以获取文件在服务器上的真实路径；
+			getRealPath(String path);
+
+			/:
+				代表web项目的根目录；
+			src目录下的内容访问：
+				/WEB-INF/classes/资源名称
+
+		3.可以作为域对象共享数据
+			setAttribute;
+			getAttribute;
+			removeAttribute;
+			可以在整个web项目中共享数据；
+
+会话技术：
+	一次会话，从浏览器第一次发送请求给服务器开始，从服务器或浏览器中有一方断开结束；
+	作用：
+		Http是一种无状态的协议；
+		每次请求响应完毕后，服务器不会记录该请求的任何状态信息
+		为了共享数据
+
+	分类：
+		浏览器会话技术:
+			Cookie:
+				基本使用：
+					创建cookie对象
+						Cookie(String key,String value)
+					通过response对象把cookie响应给浏览器
+						response.addCookie(Cookie c)
+
+			使用细节：
+				1.服务器给浏览器响应cookie，其实是添加了一个响应头 Set-Cookie
+					浏览器携带cookie给服务器，其实是添加了一个请求头 Cookie：
+				2.服务器一次可以给浏览器响应多个Cookie
+				3.如果服务器给浏览器响应多个键名相同的cookie，则值会发生覆盖
+				4.Cookie的存活时间：
+					A.cookie默认存储到浏览器的内存中，当浏览器关闭后，cookie就会销毁
+					B.Cookie.setMaxAge(int birthday)
+						正数：会把cookie持久化存储在硬盘上，并且指定过期时间为age
+						负数：默认
+						0：删除该cookie
+
+				5. cookie存储的数据大小有限制(4kb),cookie的个数有限制(20)
+					cookie存储数据不安全，cookie一般存储一些不私密，不敏感的数据
+				6.Cookie共享：
+					在同一个服务器的多个项目间共享
+						Cookie.setPath(String path):
+							path:
+								一旦设置后，只有浏览器访问该路径及其子路径的资源时，才会携带cookie给服务器
+					在不同服务器上的项目间共享：
+						Cookie.setDomain(String domain);
+
+					    例如：new.baidu.com tieba.baidu.com baike.baidu.com
+
+今日内容：
+	JSP：
+		1.JSP的简单学习
+		2.深入学习JSP
+
+	Session：
+
+	MVC：
+
+12_JSP_概念
+	什么是jsp?
+		java server page:服务器端页面
+	jsp有什么作用？
+		简化书写
+		jsp既可以写html标签，还可以写java代码
+
+13_JSP_原理
+	jsp的本质是什么？
+		就是一个Servlet
+	访问一个.jsp文件，Tomcat服务器内部会做什么事儿？
+		1.  .jsp转换为 .java文件
+		2. 编译.java 文件生成 .class文件
+		3. 加载 .class文件，运行
+
+14_JSP_脚本
+	有哪些脚本？
+	每一种脚本，当jsp转换为servlet后，这些代码在哪里放着
+
+	<% %>:  _jspService 方法中
+	<%! %>： 定义成员
+	<%= %>：_jspService 方法中,并且会把这个内容直接输出到页面上！！！！
+
+15_JSP_入门学习
+	什么是jsp内置对象？
+		在jsp页面中可以直接使用的对象
+
+		request
+		response
+		out
+
+	用out对象和response.getWriter()对象输出有什么区别（了解）？
+		以后在页面 中只用out对象输出
+		out缓冲区中的内容最终要刷入到writer缓冲区中，然后再响应给浏览器
+
+16_JSP_案例_改造Cookie案例
+	jsp页面中的代码能不能截断？ 可以
+	在标签内如何嵌套java代码？  脚本
+
+17_会话技术_Session_快速入门
+	如何获取Session对象？
+	如何往session中存储数据？
+	如何从session中获取数据？
+
+18_会话技术_Session_原理分析
+	session的共享流程？
+		1.第一次请求获取session对象，新创建一个Session对象，
+		同时给浏览器响应一个 JSESSIONID的cookie
+		2.第二次请求获取session时，浏览器携带了一个JSESSIONID的cookie，
+		服务器就会根据这个id值来获取对应的session对象(就是第一次请求创建的session对象)
+	为什么浏览器关闭后，Session里面的数据就不能再共享了？
+		浏览器关闭后会话结束，JSESSIONID默认是存储在内存中的，所以浏览器关闭，
+		JSESSIONID也就没有了
+
+
+19_会话技术_Session_细节1
+	怎么让浏览器关闭后再打开，Session还能共享？
+	    使用cookie保存JSESSIONID到本地，在下次打开浏览器访问服务器时就会携带SESSIONID
+
+20_会话技术_Session_细节2
+	浏览器不关闭，服务器重启，重启前和重启后获取到的session是不是同一个？
+		不是
+	什么是session的钝化？
+	什么是session的活化？
+
+21_会话技术_Session_细节3_session销毁
+	session对象默认的失效时间？  30min，通过修改tomcat按照目录下conf\web.xml配置文件修改
+
+	invalidate();  代码中调用Session对象的该方法
+
+22_会话技术_Session_特点
+	session和cookie的联系与区别？
+
+23_案例_验证码_需求&分析
+	转发：  dispatch
+		request域用来共享数据：只能在一次请求中共享数据；
+		session:
+		servletContext:项目所在服务启动后一直存在，直到服务器关闭
+
+		当确定了共享的数据要存放到request域中时，需要使用请求转发完成资源跳转
+
+	重定向：  redirect
+		如果共享的数据不需要放在request域中，就会选择重定向
+
+24_案例_验证码_代码实现
+	转发的时候写 request.getRequestDispatcher("/day16/login.jsp")可以么?
+	重定向的时候写 response.sendRedirect("success.jsp")可以么？
+
+25_案例_验证码_细节处理
+	如果验证码没有及时更新，会有什么问题？
+
+02_JSP_指令_概述
+	jsp指令格式？
+		<%@ 指令名称 键值对%>
+	jsp指令的分类？
+		page
+		include
+		taglib
+
+03_JSP_指令_page指令
+	如何设置响应体的编码格式？
+		contentType;
+	如何设置jsp页面的编码格式？
+		pageEncoding;
+	如何导入java的包？
+		import
+	如何指定当前页面发生错误后跳转的页面？
+		errorPage
+	如何指定当前页面是不是错误页面?
+		isErrorPage
+
+04_JSP_指令_include&taglib指令
+	如何引入外部的jsp文件？
+		include
+	如何引入外部的标签库？
+		taglib
+
+05_JSP_注释
+	jsp中特有的注释？
+
+06_JSP_内置对象
+	9个内置对象？
+		pageContext
+		request
+		session
+		application
+
+		response
+		page
+		out
+		exception
+		config
+
+07_MVC_jsp演变历史
+	jsp界面中同时包含过多的html、js、java代码，有什么问题？
+		1.难以阅读；
+		2.难以维护；
+		3.难以分工；
+
+08_MVC_详解(理解)
+	开发模式，把一个程序分成了3部分
+	Controller做什么事儿？
+		获取请求参数
+		调用Model得到数据
+		把数据交给View展示
+	Model做什么事儿？
+		封装数据
+	View做什么事儿？
+		展示数据

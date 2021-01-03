@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        /*请使用js代码，完成5秒后跳转到百度首页功能；每过一秒，需要刷新剩余时间*/
+        var num = 5;
+        var elementById;
+        window.onload = function () {
+            setInterval(time, 1000);
+        };
+
+        function time() {
+            num--;
+            elementById = document.getElementById("remainder_time");
+            if (num != -1) {
+                elementById.innerText = num;
+            } else {
+                location.href = "https://www.baidu.com";
+            }
+        }
+    </script>
+    <style>
+        div{
+            margin-top: 15px;
+            text-align: center;
+        }
+        div span{
+            color: #FF0000;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <span id="remainder_time">5</span>秒后跳转到百度页面
+</div>
+</body>
+</html>

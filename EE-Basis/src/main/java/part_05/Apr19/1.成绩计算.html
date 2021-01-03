@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        //数组中保存了多个成绩
+        var arr = new Array(80,70,86,58,90,35,89,67,50,99);
+        /*
+        分别求出平均成绩、最高成绩、最低成绩、总分
+        */
+
+        function avg() {
+            var sum = 0;
+            for (let i = 0; i < arr.length; i++) {
+                sum +=arr[i];
+            }
+            return sum/arr.length;
+        }
+        
+        function max() {
+            var max = arr[0];
+            for (let i = 1; i < arr.length; i++) {
+                if(max<arr[i]){
+                    max = arr[i];
+                }
+            }
+            return max;
+        }
+
+        function min() {
+            var min = arr[0];
+            for (let i = 1; i < arr.length; i++) {
+                if(min>arr[i]){
+                    min = arr[i];
+                }
+            }
+            return min;
+        }
+
+        function sum() {
+            var sum=0;
+            for (let i = 0; i < arr.length; i++) {
+                sum+=arr[i];
+            }
+            return sum;
+        }
+        console.log("平均分为:"+avg());
+        console.log("最高分为:"+max());
+        console.log("最低分为:"+min());
+        console.log("总分分为:"+sum());
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

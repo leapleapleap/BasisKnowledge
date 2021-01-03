@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态表格</title>
+
+    <!--使用CSS调整表格的样式-->
+    <style>
+        /*表格整体样式*/
+        table {
+            /*边框为1个像素的实现*/
+            border: 1px solid;
+            /*外边距：自适应*/
+            margin: auto;
+            /*宽度为500像素*/
+            width: 500px;
+        }
+
+        /*单元格和表头单元格样式*/
+        td, th {
+            /*文本居中*/
+            text-align: center;
+            /*边框为1个像素的实现*/
+            border: 1px solid red;
+        }
+
+        /*div样式*/
+        div {
+            /*文本居中*/
+            text-align: center;
+            margin: 50px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div>
+    <!--设置id文本输入框-->
+    <input type="text" id="id" placeholder="请输入编号">
+    <!--设置姓名输入框-->
+    <input type="text" id="name" placeholder="请输入姓名">
+    <!--设置性别输入框-->
+    <input type="text" id="gender" placeholder="请输入性别">
+    <!--设置添加信息按钮-->
+    <input type="button" value="添加" id="btn_add">
+</div>
+<!--信息表-->
+<table>
+    <!--表信息-->
+    <caption>学生信息表</caption>
+    <!--第一行，表头行-->
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>操作</th>
+    </tr>
+    <!--第二行-->
+    <tr>
+        <td>1</td>
+        <td>令狐冲</td>
+        <td>男</td>
+        <!--给超链接添加 href属性 和 事件-->
+        <td><a href="javascript:void(0);" onclick="delTr(this)">删除</a></td>
+    </tr>
+
+    <tr>
+        <td>2</td>
+        <td>任我行</td>
+        <td>男</td>
+        <!--给超链接添加 href属性 和 事件-->
+        <td><a href="javascript:void(0);" onclick="delTr(this)">删除</a></td>
+    </tr>
+
+    <tr>
+        <td>3</td>
+        <td>岳不群</td>
+        <td>?</td>
+        <!--给超链接添加 href属性 和 事件-->
+        <td><a href="javascript:void(0);" onclick="delTr(this)">删除</a></td>
+    </tr>
+</table>
+
+<script>
+    // 给btn_add添加按钮添加事件，当点击后获取文本输入框的内容并将内容添加到表格中
+    document.getElementById("btn_add").onclick = function () {
+        //获得文本框输入的内容
+        var id = document.getElementById("id").value;
+        var name = document.getElementById("name").value;
+        var gender = document.getElementById("gender").value;
+
+        //创建单元格元素td、文本元素textnode，将id传入文本元素，将文本元素添加到单元格元素td中
+        var td_id = document.createElement("td");
+        var text_id = document.createTextNode(id);
+        td_id.appendChild(text_id);
+
+        //创建单元格元素td、文本元素textnode，将name传入文本元素，将文本元素添加到单元格元素td中
+        var td_name = document.createElement("td");
+        var text_name = document.createTextNode(name);
+        td_name.appendChild(text_name);
+
+        //创建单元格元素td、文本元素textnode，将gender传入文本元素，将文本元素添加到单元格元素td中
+        var td_gender = document.createElement("td");
+        var text_gender = document.createTextNode(gender);
+        td_gender.appendChild(text_gender);
+
+        //创建单元格元素td
+        var td_a = document.createElement("td");
+        //创建超链接标签元素a
+        var ele_a = document.createElement("a");
+        //给超链接标签a添加属性href，其中javascript:void(0)代表只保留超链接样式，不会再点击后发生跳转
+        ele_a.setAttribute("href", "javascript:void(0);");
+        //给该超链接元素添加事件
+        ele_a.setAttribute("onclick", "delTr(this);");
+
+        //创建文本元素textnode，其内容为“删除"
+        var text_a = document.createTextNode("删除");
+        //将文本元素添加到超链接a标签元素中
+        ele_a.appendChild(text_a);
+        //将超链接元素a添加到单元格元素td中
+        td_a.appendChild(ele_a);
+
+        //创建单元行元素tr
+        var tr = document.createElement("tr");
+        //将以上创建并添加过元素的单元格元素均添加到单元行元素中
+        tr.appendChild(td_id);
+        tr.appendChild(td_name);
+        tr.appendChild(td_gender);
+        tr.appendChild(td_a);
+
+        //获取表格元素（因getElementByTagName方法返回的是数组，因此需取0索引位置的表格）
+        var table = document.getElementsByTagName("table")[0];
+        //将以上添加了单元格元素的单元行元素添加至表格中
+        table.appendChild(tr);
+    };
+
+    function delTr(obj) {
+        // alert(obj);
+        var table = obj.parentNode.parentNode.parentNode;
+        // alert(table);
+        var tr = obj.parentNode.parentNode;
+        // alert(tr);
+        table.removeChild(tr);
+    }
+
+</script>
+</body>
+</html>
