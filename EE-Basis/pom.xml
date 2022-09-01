@@ -91,7 +91,7 @@
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.11.2</version>
+            <version>1.15.3</version>
         </dependency>
         <!-- Xpath ： 通过jsoup获取document对象，再通过API获取对象中的某些标签内容 -->
         <dependency>
